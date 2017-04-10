@@ -24,8 +24,9 @@ namespace UniversityInformationSystem.App
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/cyborg.bootstrap.min.css",
-                      "~/Content/site.css"));
+                      "~/Content/united.bootstrap.min.css",
+                      "~/Content/Site.css",
+                      "~/Content/login-form.css"));
         }
     }
 }

@@ -3,12 +3,11 @@
     ViewBag.Title = "Log in";
 }
 
-<link rel="stylesheet" href="~/Content/login-form.css">
-
 <div style="text-align: center">
     <h2>Welcome to the System!</h2><br/>
     <h2>Please Log in.</h2>
 </div>
+
 <div class="container">
     <div id="login">
         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
@@ -16,8 +15,8 @@
             @Html.AntiForgeryToken()
             <div class="row">
                 <span class="cspan fontawesome-user"></span>
-                @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email" })<br />
-                @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+                @Html.TextBoxFor(m => m.UserName, new { @placeholder = "Username" })<br />
+                @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "text-danger" })
 
                 <span class="cspan fontawesome-lock"></span>
                 @Html.PasswordFor(m => m.Password, new { @placeholder = "Password" })

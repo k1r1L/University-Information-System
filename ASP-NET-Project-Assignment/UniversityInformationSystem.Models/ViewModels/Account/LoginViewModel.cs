@@ -5,9 +5,9 @@
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [RegularExpression(@"^[a-z\d]{5,10}$", ErrorMessage = "The username must contain only lowercase letters and digits between 5-10")]
+        [Display(Name = "Username:")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

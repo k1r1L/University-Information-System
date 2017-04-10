@@ -24,7 +24,5 @@ textarea {
 }
 footer {
     text-align: center;
-}
-.btn-success:hover {
-    background-color: green;
+    color: #FF4500
 }
