@@ -15,8 +15,10 @@
             @Html.AntiForgeryToken()
             <div class="row">
                 <span class="cspan fontawesome-user"></span>
-                @Html.TextBoxFor(m => m.UserName, new { @placeholder = "Username" })<br />
-                @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "text-danger" })
+                <div>
+                    @Html.TextBoxFor(m => m.UserName, new { @placeholder = "Username" })<br />
+                    @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "text-danger" })
+                </div>
 
                 <span class="cspan fontawesome-lock"></span>
                 @Html.PasswordFor(m => m.Password, new { @placeholder = "Password" })

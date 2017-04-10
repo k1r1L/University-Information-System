@@ -83,5 +83,5 @@ after { clear: both; }
   transition: background 0.3s ease-in-out;
 }
 #login form input[type="submit"]:hover {
-  background: #FF4500;
+    background: orange;
 }
