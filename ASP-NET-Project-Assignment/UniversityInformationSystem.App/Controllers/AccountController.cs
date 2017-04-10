@@ -1,13 +1,16 @@
 ﻿namespace UniversityInformationSystem.App.Controllers
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
+    using Data;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
     using Models.EntityModels;
+    using Services;
     using UniversityInformationSystem.Models.ViewModels.Account;
 
     [Authorize]
@@ -15,9 +18,10 @@
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private UsersService usersService;
         public AccountController()
         {
+           this.usersService = new UsersService();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -71,13 +75,25 @@
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
+
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    var user = await UserManager.FindAsync(model.UserName, model.Password);
+                    var roles = await UserManager.GetRolesAsync(user.Id);
+
+                    if (roles.Contains("Administrator"))
+                    {
+                        return Redirect("/admin/index");
+                    }
+                    if (roles.Contains("Teacher")) // TODO: Finish this
+                    {
+                        return RedirectToAction("Index", "Teacher");
+                    }
+
+                    return RedirectToAction("Index", "Student");  // TODO: Finish this
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -130,38 +146,6 @@
                     ModelState.AddModelError("", "Invalid code.");
                     return View(model);
             }
-        }
-
-        //
-        // GET: /Account/Register
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Account/Register
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
-                    return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
         }
 
         //
@@ -384,7 +368,7 @@
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //
@@ -441,7 +425,7 @@
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
