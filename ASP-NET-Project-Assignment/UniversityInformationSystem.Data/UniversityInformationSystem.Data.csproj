@@ -63,13 +63,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201704092032268_InitialCreate.cs" />
-    <Compile Include="Migrations\201704092032268_InitialCreate.Designer.cs">
-      <DependentUpon>201704092032268_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704101333417_AdditionalPropertiesForAppUser.cs" />
-    <Compile Include="Migrations\201704101333417_AdditionalPropertiesForAppUser.Designer.cs">
-      <DependentUpon>201704101333417_AdditionalPropertiesForAppUser.cs</DependentUpon>
+    <Compile Include="Migrations\201704111149156_InitialCreate.cs" />
+    <Compile Include="Migrations\201704111149156_InitialCreate.Designer.cs">
+      <DependentUpon>201704111149156_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,11 +86,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201704092032268_InitialCreate.resx">
-      <DependentUpon>201704092032268_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704101333417_AdditionalPropertiesForAppUser.resx">
-      <DependentUpon>201704101333417_AdditionalPropertiesForAppUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704111149156_InitialCreate.resx">
+      <DependentUpon>201704111149156_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

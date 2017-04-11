@@ -14,10 +14,9 @@ namespace UniversityInformationSystem.Data.Migrations
         {
             AutomaticMigrationsEnabled = false;
             AutomaticMigrationDataLossAllowed = true;
-            ContextKey = "UniversityInformationSystem.Data.UisDataContext";
         }
 
-        protected override void Seed(UisDataContext context)
+        protected override void Seed(UniversityInformationSystem.Data.UisDataContext context)
         {
             if (!context.Roles.Any(role => role.Name == "Administrator"))
             {

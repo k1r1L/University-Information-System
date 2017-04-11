@@ -10,7 +10,6 @@
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
     using Models.EntityModels;
-    using Services;
     using UniversityInformationSystem.Models.ViewModels.Account;
 
     [Authorize]
@@ -18,10 +17,8 @@
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private UsersService usersService;
         public AccountController()
         {
-           this.usersService = new UsersService();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -75,7 +72,7 @@
                 return View(model);
             }
 
-            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, false, shouldLockout: false);
 
             switch (result)
             {
@@ -85,19 +82,19 @@
 
                     if (roles.Contains("Administrator"))
                     {
-                        return Redirect("/home/index");
+                        return Redirect("/admin/home/index");
                     }
-                    if (roles.Contains("Teacher")) // TODO: Finish this
+                    if (roles.Contains("Teacher")) 
                     {
-                        return RedirectToAction("Index", "Teacher");
+                        return Redirect("/teacher/home/index");
                     }
 
-                    return RedirectToAction("Index", "Student");  // TODO: Finish this
+                    return Redirect("/student/home/index");
 
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");

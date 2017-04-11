@@ -46,6 +46,7 @@
         //
         // POST: /Account/Register
         [HttpPost]
+        [Route("register")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
