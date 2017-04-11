@@ -85,7 +85,7 @@
 
                     if (roles.Contains("Administrator"))
                     {
-                        return Redirect("/admin/index");
+                        return Redirect("/home/index");
                     }
                     if (roles.Contains("Teacher")) // TODO: Finish this
                     {

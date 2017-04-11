@@ -23,10 +23,14 @@ namespace UniversityInformationSystem.App
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/sidebar").Include(
+                      "~/Scripts/sidebar.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/united.bootstrap.min.css",
                       "~/Content/Site.css",
-                      "~/Content/login-form.css"));
+                      "~/Content/login-form.css",
+                      "~/Content/sidebar.css"));
         }
     }
 }
