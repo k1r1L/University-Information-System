@@ -10,6 +10,7 @@ namespace UniversityInformationSystem.App
 {
     using Data;
     using Models.EntityModels;
+    using Models.EntityModels.Users;
 
     public partial class Startup
     {

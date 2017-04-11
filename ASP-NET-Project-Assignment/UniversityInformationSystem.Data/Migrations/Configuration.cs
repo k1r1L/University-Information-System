@@ -7,6 +7,7 @@ namespace UniversityInformationSystem.Data.Migrations
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models.EntityModels;
+    using Models.EntityModels.Users;
 
     internal sealed class Configuration : DbMigrationsConfiguration<UniversityInformationSystem.Data.UisDataContext>
     {

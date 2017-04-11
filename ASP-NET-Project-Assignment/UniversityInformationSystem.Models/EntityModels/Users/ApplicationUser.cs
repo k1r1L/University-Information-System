@@ -1,21 +1,22 @@
-﻿namespace UniversityInformationSystem.Models.EntityModels
+﻿namespace UniversityInformationSystem.Models.EntityModels.Users
 {
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Threading.Tasks;
     using System.Security.Claims;
+    using System.Threading.Tasks;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
+    using Utillities;
 
     public class ApplicationUser : IdentityUser
     {
         [Required]
-        [RegularExpression("^[A-Za-z]+$")]
+        [RegularExpression(ValidationConstants.AppUserNameRegex)]
         public string FirstName { get; set; }
 
         [Required]
-        [RegularExpression("^[A-Za-z]+$")]
+        [RegularExpression(ValidationConstants.AppUserNameRegex)]
         public string LastName { get; set; }
 
         [NotMapped]

@@ -11,6 +11,7 @@
     using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.AspNet.Identity.Owin;
     using Models.EntityModels;
+    using Models.EntityModels.Users;
     using Models.ViewModels.Account;
 
     [RoutePrefix("users")]

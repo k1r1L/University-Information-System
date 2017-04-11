@@ -10,6 +10,7 @@
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
     using Models.EntityModels;
+    using Models.EntityModels.Users;
     using UniversityInformationSystem.Models.ViewModels.Account;
 
     [Authorize]

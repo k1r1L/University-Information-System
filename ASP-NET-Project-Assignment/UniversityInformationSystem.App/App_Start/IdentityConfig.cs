@@ -15,6 +15,7 @@ namespace UniversityInformationSystem.App
 {
     using Data;
     using Models.EntityModels;
+    using Models.EntityModels.Users;
 
     public class EmailService : IIdentityMessageService
     {
