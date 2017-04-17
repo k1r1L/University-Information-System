@@ -1,0 +1,35 @@
+﻿namespace UniversityInformationSystem.Models.ViewModels.Admin
+{
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
+    using Utillities;
+
+    public class CourseViewModel
+    {
+        [HiddenInput(DisplayValue = false)]
+        public int Id { get; set; }
+
+        [Required]
+        [StringLength(ValidationConstants.CourseNameLength, ErrorMessage = ValidationConstants.ValidationErrorMessages.InvalidCourseName)]
+        [Display(Name = "Name:")]
+        public string Name { get; set; }
+
+        [Required]
+        [StringLength(ValidationConstants.CourseDescriptionLength, ErrorMessage = ValidationConstants.ValidationErrorMessages.InvalidCourseDescription)]
+        [Display(Name = "Description:")]
+        public string Description { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        [Display(Name = "Count of enrolled students:")]
+        public int StudentsCount { get; set; }
+
+        [Required]
+        [Display(Name = "Open Course:")]
+        [RegularExpression(ValidationConstants.OpenCourseRegex, ErrorMessage = ValidationConstants.ValidationErrorMessages.InvalidOpenCourseValue)]
+        public string IsOpen { get; set; }
+
+        [Required]
+        [Display(Name = "Teacher:")]
+        public string Teacher { get; set; }
+    }
+}

@@ -16,8 +16,8 @@
         public string IdenityUserId { get; set; }
 
         [ForeignKey("IdenityUserId")]
-        public ApplicationUser IdentityUser { get; set; }
+        public virtual ApplicationUser IdentityUser { get; set; }
 
-        public ICollection<Course> LeadingCourses { get; set; }
+        public virtual ICollection<Course> LeadingCourses { get; set; }
     }
 }

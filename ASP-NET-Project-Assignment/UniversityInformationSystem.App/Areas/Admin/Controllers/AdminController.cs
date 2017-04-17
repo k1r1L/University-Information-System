@@ -2,7 +2,7 @@
 {
     using System.Web.Mvc;
 
-    [RouteArea("Admin")]
+    [RouteArea("admin")]
     [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {

@@ -73,6 +73,8 @@ namespace UniversityInformationSystem.App
             kernel.Bind(typeof(IUisDataContext)).To(typeof(UisDataContext));
             kernel.Bind(typeof(IDbRepository<>)).To(typeof(DbRepository<>));
             kernel.Bind(typeof(IRegisterService)).To(typeof(RegisterService));
+            kernel.Bind(typeof(IAdminCoursesService)).To(typeof(AdminCoursesService));
+            kernel.Bind(typeof(IAdminTeachersService)).To(typeof(AdminTeachersService));
 
             // TODO: Maybe try to finish this
             //kernel.Bind(
@@ -80,6 +82,6 @@ namespace UniversityInformationSystem.App
             //        b.FromAssembliesMatching("UniversityInformationSystem.Services")
             //            .SelectAllClasses()
             //            .BindSingleInterface());
-        }        
+        }
     }
 }

@@ -1,23 +1,18 @@
 ﻿namespace UniversityInformationSystem.App.Areas.Admin.Controllers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Web;
     using System.Web.Mvc;
     using System.Threading.Tasks;
     using AutoMapper;
     using Data;
-    using Data.Contracts;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.AspNet.Identity.Owin;
-    using Models.EntityModels;
     using Models.EntityModels.Users;
     using Models.Enums;
     using Models.ViewModels.Account;
     using Models.ViewModels.Admin;
-    using Services;
     using Services.Contracts;
 
     [RoutePrefix("users")]
