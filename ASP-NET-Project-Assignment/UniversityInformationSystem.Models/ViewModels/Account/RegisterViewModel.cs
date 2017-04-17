@@ -1,10 +1,27 @@
 ﻿namespace UniversityInformationSystem.Models.ViewModels.Account
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
+    using Enums;
     using Utillities;
 
     public class RegisterViewModel
     {
+
+        [Required]
+        [RegularExpression(ValidationConstants.AppUserNameRegex, ErrorMessage = ValidationConstants.ValidationErrorMessages.AppUserNamesMessage)]
+        [Display(Name = "First name:")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [RegularExpression(ValidationConstants.AppUserNameRegex, ErrorMessage = ValidationConstants.ValidationErrorMessages.AppUserNamesMessage)]
+        [Display(Name = "Last name:")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Birth date:")]
+        public DateTime BirthDate { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email:")]
@@ -30,5 +47,9 @@
             ErrorMessage = ValidationConstants.ValidationErrorMessages.UserNameErrorMsg)]
         [Display(Name = "Username:")]
         public string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "Type of user:")]
+        public UserType UserType { get; set; }
     }
 }

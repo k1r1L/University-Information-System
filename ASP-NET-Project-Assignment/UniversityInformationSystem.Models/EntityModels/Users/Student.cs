@@ -23,9 +23,11 @@
         [Index(IsUnique = true)]
         public string FacultyNumber { get; set; }
 
-        public virtual ICollection<StudentCourse> EnrolledCourses { get; set; }
+        public string IdenityUserId { get; set; }
 
-        [Required]
-        public virtual ApplicationUser IdentityUser { get; set; }
+        [ForeignKey("IdenityUserId")]
+        public ApplicationUser IdentityUser { get; set; }
+
+        public ICollection<StudentCourse> EnrolledCourses { get; set; }
     }
 }

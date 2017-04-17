@@ -27,8 +27,8 @@
         [Required]
         public bool IsOpen { get; set; }
 
-        public virtual ICollection<StudentCourse> EnrolledStudents { get; set; }
+        public ICollection<StudentCourse> EnrolledStudents { get; set; }
 
-        public virtual Teacher Teacher { get; set; }
+        public Teacher Teacher { get; set; }
     }
 }

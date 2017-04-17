@@ -2,14 +2,22 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Teacher
     {
+        public Teacher()
+        {
+            this.LeadingCourses = new HashSet<Course>();
+        }
+
         public int Id { get; set; }
 
-        public virtual ICollection<Course> LeadingCourses { get; set; }
+        public string IdenityUserId { get; set; }
 
-        [Required]
-        public virtual ApplicationUser IdentityUser { get; set; }
+        [ForeignKey("IdenityUserId")]
+        public ApplicationUser IdentityUser { get; set; }
+
+        public ICollection<Course> LeadingCourses { get; set; }
     }
 }

@@ -16,8 +16,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("University Information System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </button>                                                       <!--Make this work for teachers/students-->
+                @Html.ActionLink("University Information System", "Index", "Home", new { area = "Admin"  }, new { @class = "navbar-brand" })
             </div>
             @Html.Partial("_LoginPartial")
         </div>

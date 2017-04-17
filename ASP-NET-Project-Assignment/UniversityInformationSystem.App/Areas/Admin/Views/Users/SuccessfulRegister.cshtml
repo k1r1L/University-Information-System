@@ -1,7 +1,11 @@
-﻿
+﻿@model UniversityInformationSystem.Models.ViewModels.Admin.RegisterSuccessViewModel
 @{
     ViewBag.Title = "Successful Register";
 }
 
-<h2>Congrats, You have successfully registered someone!</h2>
+<div class="col-lg-offset-3 col-m-offset-3 col-sm-offset-3">
+    <p>
+        Congrats, You have successfully registered @Model.FirstName @Model.LastName (@Model.UserName) with role @Model.UserType!
+    </p>
+</div>
 

@@ -98,6 +98,7 @@
     <Compile Include="EntityModels\Users\ApplicationUser.cs" />
     <Compile Include="EntityModels\Users\Student.cs" />
     <Compile Include="EntityModels\Users\Teacher.cs" />
+    <Compile Include="Enums\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utillities\FacultyNumberGenerator.cs" />
     <Compile Include="Utillities\ValidationConstants.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
+    <Compile Include="ViewModels\Admin\RegisterSuccessViewModel.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\ConfigureTwoFactorViewModel.cs" />

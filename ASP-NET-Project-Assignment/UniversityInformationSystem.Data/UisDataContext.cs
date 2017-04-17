@@ -3,27 +3,30 @@ namespace UniversityInformationSystem.Data
     using System;
     using System.Data.Entity;
     using System.Linq;
+    using System.Runtime.CompilerServices;
+    using Contracts;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models.EntityModels;
     using Models.EntityModels.Users;
 
-    public class UisDataContext : IdentityDbContext<ApplicationUser>
+    public class UisDataContext : IdentityDbContext<ApplicationUser>, IUisDataContext
     {
         public UisDataContext()
             : base("name=UisDataContext")
         {
         }
 
-        public virtual DbSet<Student> Students { get; set; }
+        public virtual IDbSet<Student> Students { get; set; }
 
-        public virtual DbSet<Teacher> Teachers { get; set; }
+        public virtual IDbSet<Teacher> Teachers { get; set; }
 
-        public virtual DbSet<Course> Courses { get; set; }
+        public virtual IDbSet<Course> Courses { get; set; }
 
-        public virtual DbSet<StudentCourse> StudentsCourses { get; set; }
+        public virtual IDbSet<StudentCourse> StudentsCourses { get; set; }
 
         public static UisDataContext Create()
         {
+            
             return new UisDataContext();
         }
 

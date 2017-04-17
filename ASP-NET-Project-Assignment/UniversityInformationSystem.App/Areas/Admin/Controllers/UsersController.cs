@@ -6,23 +6,32 @@
     using System.Web;
     using System.Web.Mvc;
     using System.Threading.Tasks;
+    using AutoMapper;
     using Data;
+    using Data.Contracts;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.AspNet.Identity.Owin;
     using Models.EntityModels;
     using Models.EntityModels.Users;
+    using Models.Enums;
     using Models.ViewModels.Account;
+    using Models.ViewModels.Admin;
+    using Services;
+    using Services.Contracts;
 
     [RoutePrefix("users")]
     public class UsersController : AdminController
     {
         private ApplicationUserManager _userManager;
+        private IRegisterService registerService;
 
-        public UsersController()
+        // TODO: Inject userManager
+        public UsersController(IRegisterService registerService)
         {
             this.UserManager = new ApplicationUserManager(
                 new UserStore<ApplicationUser>(new UisDataContext()));
+            this.registerService = registerService;
         }
 
         public ApplicationUserManager UserManager
@@ -53,15 +62,31 @@
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser
-                {
-                    UserName = model.UserName,
-                    Email = model.Email
-                };
+                ApplicationUser user = Mapper.Map<ApplicationUser>(model);
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    return View("SuccessfulRegister");
+                    switch (model.UserType)
+                    {
+                        case UserType.Administrator:
+                            this.UserManager.AddToRole(user.Id, "Administrator");
+                            break;
+                        case UserType.Teacher:
+                            this.UserManager.AddToRole(user.Id, "Teacher");
+                            break;
+                        case UserType.Student:
+                            this.UserManager.AddToRole(user.Id, "Student");
+                            break;
+                        default:
+                            throw new ArgumentException("Invalid Role!");
+                    }
+
+                    this.registerService.Register(model.UserType, user.Id);
+
+                    var successfulRegisterVm = Mapper.Map<RegisterSuccessViewModel>(user);
+                    successfulRegisterVm.UserType = model.UserType;
+                    return View("SuccessfulRegister", successfulRegisterVm);
                 }
 
                 AddErrors(result);
