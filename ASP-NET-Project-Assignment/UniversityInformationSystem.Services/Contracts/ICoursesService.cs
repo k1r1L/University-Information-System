@@ -8,11 +8,11 @@
     using Models.EntityModels;
     using Models.ViewModels.Admin;
 
-    public interface IAdminCoursesService
+    public interface ICoursesService
     {
         IQueryable<CourseViewModel> GetAll();
 
-        void Create(CourseViewModel courseViewModel);
+        int Create(CourseViewModel courseViewModel);
 
         void Update(CourseViewModel courseViewModel);
 

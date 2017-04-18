@@ -1,5 +1,6 @@
 ﻿namespace UniversityInformationSystem.App.Areas.Admin.Controllers
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using Kendo.Mvc.Extensions;
@@ -10,10 +11,10 @@
     [RoutePrefix("courses")]
     public class CoursesController : AdminController
     {
-        private IAdminCoursesService coursesService;
-        private IAdminTeachersService teachersService;
+        private ICoursesService coursesService;
+        private ITeachersService teachersService;
 
-        public CoursesController(IAdminCoursesService coursesService, IAdminTeachersService teachersService)
+        public CoursesController(ICoursesService coursesService, ITeachersService teachersService)
         {
             this.coursesService = coursesService;
             this.teachersService = teachersService;
@@ -22,6 +23,9 @@
         [Route("all")]
         public ActionResult Index()
         {
+            ViewData["teachers"] = this.teachersService.GetAllTeachersForCourses();
+            ViewData["defaultTeacher"] = this.teachersService.GetFirst();
+
             return View();
         }
 
@@ -35,47 +39,66 @@
 
         [Route("CourseViewModels_Create")]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult CourseViewModels_Create([DataSourceRequest]DataSourceRequest request, CourseViewModel courseViewModel)
+        public ActionResult CourseViewModels_Create([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CourseViewModel> courses)
         {
-            if (ModelState.IsValid)
+            List<CourseViewModel> results = new List<CourseViewModel>();
+            if (courses != null && ModelState.IsValid)
             {
-                this.coursesService.Create(courseViewModel);
+                foreach (CourseViewModel course in courses)
+                {
+                    int teacherId = course.Teacher.Id;
+                    int courseId = this.coursesService.Create(course);
+
+                    if (this.teachersService.TeacherExists(course.Teacher.UserName))
+                    {
+                        this.coursesService.AddTeacher(teacherId, courseId);
+                    }
+
+                    results.Add(course);
+                }
+
             }
 
-            return Json(new[] { courseViewModel }.ToDataSourceResult(request, ModelState));
+            return Json(results.ToDataSourceResult(request, this.ModelState));
         }
 
         [Route("CourseViewModels_Update")]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult CourseViewModels_Update([DataSourceRequest]DataSourceRequest request, CourseViewModel courseViewModel, string teacher)
+        public ActionResult CourseViewModels_Update([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CourseViewModel> courses)
         {
-            if (this.teachersService.TeacherExists(teacher))
+            List<CourseViewModel> results = new List<CourseViewModel>();
+            if (courses!= null && ModelState.IsValid)
             {
-                this.coursesService.AddTeacher(this.teachersService.GetTeacherId(teacher), courseViewModel.Id);
-            }
-            else
-            {
-                this.ModelState.AddModelError("Teacher", "The teacher does not exist!");
+                foreach (CourseViewModel course in courses)
+                {
+                    if (this.teachersService.TeacherExists(course.Teacher.UserName))
+                    {
+                        this.coursesService.AddTeacher(course.Teacher.Id, course.Id);
+                    }
+
+                    this.coursesService.Update(course);
+                    results.Add(course);
+                }
+
             }
 
-            if (ModelState.IsValid)
-            {
-                this.coursesService.Update(courseViewModel);
-            }
-
-            return Json(new[] { courseViewModel }.ToDataSourceResult(request, this.ModelState));
+            return Json(results.ToDataSourceResult(request, this.ModelState));
         }
 
         [Route("CourseViewModels_Destroy")]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult CourseViewModels_Destroy([DataSourceRequest]DataSourceRequest request, CourseViewModel courseViewModel)
+        public ActionResult CourseViewModels_Destroy([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CourseViewModel> courses)
         {
-            if (ModelState.IsValid)
+            if (courses.Any())
             {
-                this.coursesService.Delete(courseViewModel.Id);
+                foreach (CourseViewModel course in courses)
+                {
+                    this.coursesService.Delete(course.Id);
+                }
+
             }
 
-            return Json(new[] { courseViewModel }.ToDataSourceResult(request, ModelState));
+            return Json(courses.ToDataSourceResult(request, this.ModelState));
         }
     }
 }

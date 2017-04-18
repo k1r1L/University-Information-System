@@ -73,8 +73,8 @@ namespace UniversityInformationSystem.App
             kernel.Bind(typeof(IUisDataContext)).To(typeof(UisDataContext));
             kernel.Bind(typeof(IDbRepository<>)).To(typeof(DbRepository<>));
             kernel.Bind(typeof(IRegisterService)).To(typeof(RegisterService));
-            kernel.Bind(typeof(IAdminCoursesService)).To(typeof(AdminCoursesService));
-            kernel.Bind(typeof(IAdminTeachersService)).To(typeof(AdminTeachersService));
+            kernel.Bind(typeof(ICoursesService)).To(typeof(CoursesService));
+            kernel.Bind(typeof(ITeachersService)).To(typeof(TeachersService));
 
             // TODO: Maybe try to finish this
             //kernel.Bind(

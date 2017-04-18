@@ -1,5 +1,6 @@
 ﻿namespace UniversityInformationSystem.Models.ViewModels.Admin
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
     using Utillities;
@@ -30,6 +31,7 @@
 
         [Required]
         [Display(Name = "Teacher:")]
-        public string Teacher { get; set; }
+        [UIHint("TeacherEditor")]
+        public CourseTeacherViewModel Teacher { get; set; }
     }
 }

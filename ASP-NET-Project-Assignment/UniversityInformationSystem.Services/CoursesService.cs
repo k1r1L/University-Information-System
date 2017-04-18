@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Web.Mvc;
     using AutoMapper;
     using Contracts;
     using Data;
@@ -10,12 +11,12 @@
     using Models.EntityModels.Users;
     using Models.ViewModels.Admin;
 
-    public class AdminCoursesService : IAdminCoursesService
+    public class CoursesService : ICoursesService
     {
         private IDbRepository<Course> courses;
         private IDbRepository<Teacher> teachers;
 
-        public AdminCoursesService(IDbRepository<Course> courses, IDbRepository<Teacher> teachers)
+        public CoursesService(IDbRepository<Course> courses, IDbRepository<Teacher> teachers)
         {
             this.courses = courses;
             this.teachers = teachers;
@@ -29,11 +30,17 @@
             return courseVms.AsQueryable();
         }
 
-        public void Create(CourseViewModel courseViewModel)
+        public int Create(CourseViewModel courseViewModel)
         {
-            Course courseEntity = Mapper.Map<Course>(courseViewModel);
+            Course courseEntity = new Course()
+            {
+                Name = courseViewModel.Name,
+                Description = courseViewModel.Description,
+                IsOpen = courseViewModel.IsOpen == "Yes"
+            };
             this.courses.Add(courseEntity);
             this.courses.SaveChanges();
+            return courseEntity.Id;
         }
 
         public void Update(CourseViewModel courseViewModel)

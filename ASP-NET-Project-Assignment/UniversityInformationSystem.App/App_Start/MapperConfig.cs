@@ -15,14 +15,16 @@
             {
                 action.CreateMap<RegisterViewModel, ApplicationUser>();
                 action.CreateMap<ApplicationUser, RegisterSuccessViewModel>();
+                action.CreateMap<Teacher, CourseTeacherViewModel>()
+                    .ForMember(ct => ct.UserName,
+                        configExpression => configExpression.MapFrom(e => e.IdentityUser.UserName));
                 action.CreateMap<Course, CourseViewModel>()
                     .ForMember(c => c.StudentsCount,
                         configExpression => configExpression.MapFrom(e => e.EnrolledStudents.Count))
                     .ForMember(c => c.IsOpen,
-                        configExpression => configExpression.MapFrom(e => e.IsOpen ? "Yes" : "No"))
-                    .ForMember(c => c.Teacher, 
-                        configExpression => configExpression.MapFrom(e => e.Teacher == null ? "[No Teacher]" : e.Teacher.IdentityUser.UserName));
-                action.CreateMap<CourseViewModel, Course>();
+                        configExpression => configExpression.MapFrom(e => e.IsOpen ? "Yes" : "No"));
+                action.CreateMap<CourseViewModel, Course>()
+                    .ForMember(c => c.Teacher, config => config.Ignore());
             });
         }
     }

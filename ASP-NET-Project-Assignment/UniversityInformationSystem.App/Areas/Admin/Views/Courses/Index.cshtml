@@ -1,4 +1,4 @@
-﻿@Html.ValidationMessage("Teacher")
+﻿@using UniversityInformationSystem.Models.ViewModels.Admin
 @(Html.Kendo().Grid<UniversityInformationSystem.Models.ViewModels.Admin.CourseViewModel>()
       .Name("grid")
       .Columns(columns =>
@@ -7,35 +7,38 @@
           columns.Bound(c => c.Description);
           columns.Bound(c => c.StudentsCount);
           columns.Bound(c => c.IsOpen);
-          columns.Bound(c => c.Teacher);
-          columns.Command(command => {
-              command.Edit();
+          columns.Bound(c => c.Teacher).ClientTemplate("#= teacherDetails(data) #");
+          columns.Command(command =>
+          {
               command.Destroy();
-          }).Width(180);
+          }).Width(120);
       })
-      .ToolBar(toolbar => {
+      .ToolBar(toolbar =>
+      {
           toolbar.Create();
+          toolbar.Save();
       })
       .ColumnMenu()
-      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Editable(editable => editable.Mode(GridEditMode.InCell))
       .Editable(settings => settings.ConfirmDelete("Yes"))
       .Pageable(pageable => pageable
             .Refresh(true)
             .PageSizes(true)
             .ButtonCount(5))
-      .Sortable(sortable => {
+      .Sortable(sortable =>
+      {
           sortable.SortMode(GridSortMode.MultipleColumn);
       })
       .Filterable()
       .DataSource(dataSource => dataSource
           .Ajax()
+          .Batch(true)
+          .ServerOperation(false)
           .PageSize(5)
           .Model(model =>
           {
               model.Id(p => p.Id);
-              model.Field(p => p.Id).Editable(false);
-              model.Field(p => p.StudentsCount).Editable(false);
-              model.Field(p => p.IsOpen).Editable(true);
+              model.Field(p => p.Teacher).DefaultValue(ViewData["defaultTeacher"] as CourseTeacherViewModel);
           })
           .Read(read =>
           {
@@ -44,19 +47,25 @@
           .Create(create => create.Action("CourseViewModels_Create", "Courses"))
           .Update(update =>
           {
-              update.Action("CourseViewModels_Update", "Courses")
-                  .Data("onAutoCompleteTeacher");
+              update.Action("CourseViewModels_Update", "Courses");
           })
           .Destroy(destroy => destroy.Action("CourseViewModels_Destroy", "Courses"))
       )
-      )
+)
 
-@section scripts {
+@section Scripts {
     <script>
-        function onAutoCompleteTeacher() {
-            return {
-                teacher: $("#Teacher").val()
+        function teacherDetails(teacher) {
+            var html = "";
+            if (teacher.Teacher != null) {
+                html = kendo.format("<div>{0}</div>",
+                    teacher.Teacher.UserName
+                );
+            } else {
+                html = "<div>No Teacher</div>";
             }
+
+            return html;
         }
     </script>
 }

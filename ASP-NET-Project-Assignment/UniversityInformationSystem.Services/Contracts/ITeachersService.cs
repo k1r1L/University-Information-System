@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace UniversityInformationSystem.Services.Contracts
 {
-    public interface IAdminTeachersService
+    using Models.ViewModels.Admin;
+
+    public interface ITeachersService
     {
         bool TeacherExists(string teacherUsername);
 
         int GetTeacherId(string teacherUsername);
+
+        IQueryable<CourseTeacherViewModel> GetAllTeachersForCourses();
+
+        CourseTeacherViewModel GetFirst();
     }
 }
