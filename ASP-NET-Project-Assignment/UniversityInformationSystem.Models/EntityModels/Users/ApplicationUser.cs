@@ -20,7 +20,7 @@
         public string LastName { get; set; }
 
         [NotMapped]
-        public string FullName => this.FirstName + this.LastName;
+        public string FullName => this.FirstName + " " + this.LastName;
 
         [Required]
         public DateTime BirthDate { get; set; }

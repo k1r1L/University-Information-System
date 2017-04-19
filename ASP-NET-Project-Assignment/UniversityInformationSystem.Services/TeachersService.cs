@@ -27,14 +27,6 @@ namespace UniversityInformationSystem.Services
             return this.teachers.All().Any(t => t.IdentityUser.UserName == teacherUsername);
         }
 
-        public int GetTeacherId(string teacherUsername)
-        {
-            return this.teachers
-                .All()
-                .Single(t => t.IdentityUser.UserName == teacherUsername)
-                .Id;
-        }
-
         public IQueryable<CourseTeacherViewModel> GetAllTeachersForCourses()
         {
             return this.teachers.All().Select(t => new CourseTeacherViewModel()
@@ -51,6 +43,15 @@ namespace UniversityInformationSystem.Services
                 Id = t.Id,
                 UserName = t.IdentityUser.UserName
             }).First();
+        }
+
+        public int? GetTeacherId(string teacherUsername)
+        {
+            Teacher teacherEntity = this.teachers
+                .All()
+                .SingleOrDefault(t => t.IdentityUser.UserName == teacherUsername);
+
+            return teacherEntity?.Id;
         }
     }
 }

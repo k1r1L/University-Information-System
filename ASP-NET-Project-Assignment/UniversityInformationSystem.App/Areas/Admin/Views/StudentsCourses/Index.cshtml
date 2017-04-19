@@ -1,0 +1,57 @@
+﻿@using UniversityInformationSystem.Models.ViewModels.Admin
+@(Html.Kendo().Grid<AdminStudentCourseViewModel>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.StudentUsername);
+          columns.Bound(c => c.CourseName);
+          columns.Command(command =>
+          {
+              command.Destroy();
+          }).Width(120);
+      })
+      .ToolBar(toolbar =>
+      {
+          toolbar.Create();
+      })
+      .ColumnMenu()
+      .Pageable(pageable => pageable
+          .Refresh(true)
+          .PageSizes(true)
+          .ButtonCount(5))
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Filterable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .PageSize(5)
+          .Model(model =>
+          {
+              model.Id(sc => sc.StudentId);
+          })
+          .Read(read => read.Action("StudentCourse_Read", "StudentsCourses"))
+          .Create(create => create.Action("StudentCourse_Create", "StudentsCourses"))
+          .Destroy(destroy => destroy.Action("StudentCourse_Destroy", "StudentsCourses"))
+          .Events(e => e.Error("error_handler"))
+      ))
+
+@section Scripts {
+    <script>
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+    </script>
+}

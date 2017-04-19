@@ -12,7 +12,7 @@ namespace UniversityInformationSystem.Services.Contracts
     {
         bool TeacherExists(string teacherUsername);
 
-        int GetTeacherId(string teacherUsername);
+        int? GetTeacherId(string teacherUsername);
 
         IQueryable<CourseTeacherViewModel> GetAllTeachersForCourses();
 

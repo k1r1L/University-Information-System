@@ -2,24 +2,19 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Web.Mvc;
     using AutoMapper;
     using Contracts;
-    using Data;
     using Data.Contracts;
     using Models.EntityModels;
-    using Models.EntityModels.Users;
     using Models.ViewModels.Admin;
 
     public class CoursesService : ICoursesService
     {
         private IDbRepository<Course> courses;
-        private IDbRepository<Teacher> teachers;
 
-        public CoursesService(IDbRepository<Course> courses, IDbRepository<Teacher> teachers)
+        public CoursesService(IDbRepository<Course> courses)
         {
             this.courses = courses;
-            this.teachers = teachers;
         }
 
         public IQueryable<CourseViewModel> GetAll()
@@ -65,6 +60,23 @@
             Course courseEntity = this.courses.GetById(courseId);
             courseEntity.TeacherId = teacherId;
             this.courses.SaveChanges();
+        }
+
+        public int? GetCourseId(string courseName)
+        {
+            Course courseEntity = this.courses
+                .All()
+                .SingleOrDefault(c => c.Name == courseName);
+
+            return courseEntity?.Id;
+        }
+
+        public bool HasTeacher(int courseId)
+        {
+            Course courseEntity = this.courses
+                .GetById(courseId);
+
+            return courseEntity.Teacher != null;
         }
     }
 }

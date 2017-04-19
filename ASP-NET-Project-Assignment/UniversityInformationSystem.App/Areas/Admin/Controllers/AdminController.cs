@@ -4,7 +4,7 @@
 
     [RouteArea("admin")]
     [Authorize(Roles = "Administrator")]
-    public class AdminController : Controller
+    public abstract class AdminController : Controller
     {
         
     }

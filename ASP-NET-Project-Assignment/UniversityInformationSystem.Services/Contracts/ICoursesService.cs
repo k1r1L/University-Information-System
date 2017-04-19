@@ -19,5 +19,9 @@
         void Delete(int courseId);
 
         void AddTeacher(int teacherId, int courseId);
+
+        int? GetCourseId(string courseName);
+
+        bool HasTeacher(int courseId);
     }
 }

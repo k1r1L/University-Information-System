@@ -89,7 +89,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IStudentsCoursesService.cs" />
+    <Compile Include="Contracts\IStudentsService.cs" />
     <Compile Include="CoursesService.cs" />
+    <Compile Include="StudentsCoursesService.cs" />
+    <Compile Include="StudentsService.cs" />
     <Compile Include="TeachersService.cs" />
     <Compile Include="Contracts\ICoursesService.cs" />
     <Compile Include="Contracts\ITeachersService.cs" />

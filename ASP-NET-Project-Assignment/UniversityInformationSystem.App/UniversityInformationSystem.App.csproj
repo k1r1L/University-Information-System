@@ -230,6 +230,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\CoursesController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StudentsCoursesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -289,6 +290,7 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\TeacherEditor.cshtml" />
     <Content Include="Content\Kendo\fonts\glyphs\WebComponentsIcons.ttf" />
     <Content Include="Content\Kendo\fonts\glyphs\WebComponentsIcons.woff" />
+    <Content Include="Areas\Admin\Views\StudentsCourses\Index.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Libraries\Kendo.Mvc.dll" />
     <Content Include="Libraries\Kendo.Mvc.xml" />
