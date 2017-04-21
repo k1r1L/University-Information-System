@@ -6,6 +6,7 @@
     using Models.EntityModels.Users;
     using Models.ViewModels.Account;
     using Models.ViewModels.Admin;
+    using Models.ViewModels.Teacher;
 
     public class MapperConfig
     {
@@ -32,6 +33,9 @@
                     .ForMember(vm => vm.StudentId, configExpression => configExpression.MapFrom(e => e.StudentId))
                     .ForMember(vm => vm.CourseId, configExpression => configExpression.MapFrom(e => e.CourseId));
                 action.CreateMap<ApplicationUser, AdminProfileViewModel>();
+                action.CreateMap<Course, TeacherCourseViewModel>()
+                    .ForMember(c => c.StudentsCount,
+                        configExpression => configExpression.MapFrom(e => e.EnrolledStudents.Count));
             });
         }
     }

@@ -78,6 +78,7 @@ namespace UniversityInformationSystem.App
             kernel.Bind(typeof(IStudentsService)).To(typeof(StudentsService));
             kernel.Bind(typeof(IStudentsCoursesService)).To(typeof(StudentsCoursesService));
             kernel.Bind(typeof(IUserService)).To(typeof(UserService));
+            kernel.Bind(typeof(ITeacherCoursesService)).To(typeof(TeacherCoursesService));
 
             // TODO: Maybe try to finish this
             //kernel.Bind(

@@ -1,0 +1,46 @@
+﻿@using UniversityInformationSystem.Models.ViewModels.Admin
+@using UniversityInformationSystem.Models.ViewModels.Teacher
+@(Html.Kendo().Grid<TeacherCourseViewModel>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.Name);
+          columns.Bound(c => c.Description);
+          columns.Bound(c => c.StudentsCount);
+      })
+      .ToolBar(toolbar =>
+      {
+          toolbar.Save();
+      })
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.InCell))
+      .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.MultipleColumn);
+      })
+      .Filterable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Batch(true)
+          .ServerOperation(false)
+          .PageSize(5)
+          .Model(model =>
+          {
+              model.Id(p => p.Id);
+          })
+          .Read(read =>
+          {
+              read.Action("Courses_Read", "Courses");
+          })
+          .Update(update =>
+          {
+              update.Action("Courses_Update", "Courses");
+          })
+      )
+)
+
+

@@ -125,6 +125,7 @@
     <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Teacher\TeacherCourseViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ValidationAttributes\" />
