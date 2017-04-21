@@ -31,6 +31,7 @@
                         configExpression => configExpression.MapFrom(e => e.Student.IdentityUser.UserName))
                     .ForMember(vm => vm.StudentId, configExpression => configExpression.MapFrom(e => e.StudentId))
                     .ForMember(vm => vm.CourseId, configExpression => configExpression.MapFrom(e => e.CourseId));
+                action.CreateMap<ApplicationUser, AdminProfileViewModel>();
             });
         }
     }

@@ -1,0 +1,15 @@
+﻿@model UniversityInformationSystem.Models.ViewModels.Admin.AdminProfileViewModel
+@{
+    ViewBag.Title = "Profile";
+}
+
+<div class="container-fluid">
+    <div class="jumbotron">
+        <div>FIRST NAME: <strong>@Model.FirstName</strong></div>
+        <div>LAST NAME: <strong>@Model.LastName</strong></div>
+        <div>BIRTH DATE: <strong>@Model.BirthDate.ToString("dd/MM/yyyy")</strong></div>
+        <div>USERNAME: <strong>@Model.UserName</strong></div>
+    </div>
+</div>
+
+

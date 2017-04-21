@@ -112,6 +112,7 @@
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
+    <Compile Include="ViewModels\Admin\AdminProfileViewModel.cs" />
     <Compile Include="ViewModels\Admin\CourseTeacherViewModel.cs" />
     <Compile Include="ViewModels\Admin\CourseViewModel.cs" />
     <Compile Include="ViewModels\Admin\RegisterSuccessViewModel.cs" />

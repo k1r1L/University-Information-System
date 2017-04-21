@@ -15,23 +15,20 @@
         <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="/Admin/Home/Index">
+                    <a href="/Teacher/Home/Index">
                         Home<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span>
                     </a>
                 </li>
                 <li>
-                    @Html.ActionLink("Register Someone", "Register", "Users")
-                </li>
-                <li>
-                    @Html.ActionLink("Courses", "Index", "Courses")
-                </li>
-                <li>
-                    @Html.ActionLink("Students & Courses", "Index", "StudentsCourses")
-                </li>
-                <li>
-                    <a href="/Admin/Home/Profile">
+                    <a href="/Teacher/Home/Profile">
                         Profile<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span>
                     </a>
+                </li>
+                <li>
+                    @Html.ActionLink("My Courses", "", "")
+                </li>
+                <li>
+                    @Html.ActionLink("My Students", "", "")
                 </li>
                 <li>
                     <a>

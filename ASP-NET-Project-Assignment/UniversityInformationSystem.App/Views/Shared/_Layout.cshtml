@@ -16,8 +16,23 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>                                                       <!--Make this work for teachers/students-->
-                @Html.ActionLink("University Information System", "Index", "Home", new { area = "Admin"  }, new { @class = "navbar-brand" })
+                </button>
+                @if (User.IsInRole("Administrator"))
+                {
+                    @Html.ActionLink("University Information System", "Index", "Home", new { area = "Admin" }, new { @class = "navbar-brand" })
+                }
+                else if (User.IsInRole("Teacher"))
+                {
+                    @Html.ActionLink("University Information System", "Index", "Home", new { area = "Teacher" }, new { @class = "navbar-brand" })
+                }
+                else if (User.IsInRole("Student"))
+                {
+                    @Html.ActionLink("University Information System", "Index", "Home", new { area = "Student" }, new { @class = "navbar-brand" })
+                }
+                else
+                {
+                    @Html.ActionLink("University Information System", "Login", "Account", new { @class = "navbar-brand" })
+                }
             </div>
             @Html.Partial("_LoginPartial")
         </div>
@@ -34,4 +49,5 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
+
 </html>

@@ -54,7 +54,7 @@
     </Reference>
     <Reference Include="Kendo.Mvc, Version=2017.1.223.545, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libraries\Kendo.Mvc.dll</HintPath>
+      <HintPath>..\..\..\..\..\Downloads\Kendo\Kendo\Kendo.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.7\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
@@ -232,6 +232,9 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\StudentsCoursesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Teacher\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Teacher\Controllers\TeacherController.cs" />
+    <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -247,7 +250,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Kendo\kendo.common.min.css" />
     <Content Include="Content\Kendo\kendo.default.min.css" />
-    <Content Include="Content\Kendo\Default\loading-image.gif" />
     <Content Include="Content\login-form.css" />
     <Content Include="Content\sidebar.css" />
     <Content Include="Content\united.bootstrap.min.css" />
@@ -288,9 +290,32 @@
     <Content Include="Areas\Admin\Views\Courses\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Boolean.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\TeacherEditor.cshtml" />
-    <Content Include="Content\Kendo\fonts\glyphs\WebComponentsIcons.ttf" />
-    <Content Include="Content\Kendo\fonts\glyphs\WebComponentsIcons.woff" />
     <Content Include="Areas\Admin\Views\StudentsCourses\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Profile.cshtml" />
+    <Content Include="Areas\Teacher\Views\web.config" />
+    <Content Include="Areas\Teacher\Views\Shared\EditorTemplates\Boolean.cshtml" />
+    <Content Include="Areas\Teacher\Views\Shared\EditorTemplates\Currency.cshtml" />
+    <Content Include="Areas\Teacher\Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Areas\Teacher\Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Areas\Teacher\Views\Shared\EditorTemplates\Email.cshtml" />
+    <Content Include="Areas\Teacher\Views\Shared\EditorTemplates\EmailAddress.cshtml" />
+    <Content Include="Areas\Teacher\Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
+    <Content Include="Areas\Teacher\Views\Shared\EditorTemplates\Integer.cshtml" />
+    <Content Include="Areas\Teacher\Views\Shared\EditorTemplates\Number.cshtml" />
+    <Content Include="Areas\Teacher\Views\Shared\EditorTemplates\Password.cshtml" />
+    <Content Include="Areas\Teacher\Views\Shared\EditorTemplates\String.cshtml" />
+    <Content Include="Areas\Teacher\Views\Shared\EditorTemplates\TeacherEditor.cshtml" />
+    <Content Include="Areas\Teacher\Views\Shared\EditorTemplates\Time.cshtml" />
+    <Content Include="Areas\Teacher\Views\Shared\EditorTemplates\Url.cshtml" />
+    <Content Include="Areas\Teacher\Views\Shared\_TeacherPartial.cshtml" />
+    <Content Include="Areas\Teacher\Views\Shared\_TeacherLayout.cshtml" />
+    <Content Include="Areas\Teacher\Views\Shared\_TeacherSidebar.cshtml" />
+    <Content Include="Areas\Teacher\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Teacher\Views\Home\Index.cshtml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Libraries\Kendo.Mvc.dll" />
     <Content Include="Libraries\Kendo.Mvc.xml" />
@@ -308,6 +333,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\Kendo\kendo.all.min.js" />
     <Content Include="Scripts\Kendo\kendo.aspnetmvc.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
@@ -368,6 +394,8 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Kendo\Default\" />
+    <Folder Include="Content\Kendo\fonts\" />
     <Folder Include="Views\Courses\" />
   </ItemGroup>
   <PropertyGroup>
