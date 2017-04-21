@@ -36,6 +36,13 @@
                 action.CreateMap<Course, TeacherCourseViewModel>()
                     .ForMember(c => c.StudentsCount,
                         configExpression => configExpression.MapFrom(e => e.EnrolledStudents.Count));
+                action.CreateMap<StudentCourse, TeacherStudentCourseViewModel>()
+                    .ForMember(vm => vm.CourseName, configExpression => configExpression.MapFrom(e => e.Course.Name))
+                    .ForMember(vm => vm.StudentUsername,
+                        configExpression => configExpression.MapFrom(e => e.Student.IdentityUser.UserName))
+                    .ForMember(vm => vm.StudentId, configExpression => configExpression.MapFrom(e => e.StudentId))
+                    .ForMember(vm => vm.CourseId, configExpression => configExpression.MapFrom(e => e.CourseId))
+                    .ForMember(vm => vm.Grade, configExpression => configExpression.MapFrom(e => e.Grade));
             });
         }
     }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UniversityInformationSystem.Services.Contracts
+﻿namespace UniversityInformationSystem.Services.Contracts
 {
+    using System.Linq;
     using Models.ViewModels.Admin;
 
     public interface ITeachersService

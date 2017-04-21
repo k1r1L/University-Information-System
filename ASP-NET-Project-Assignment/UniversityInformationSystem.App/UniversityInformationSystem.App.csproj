@@ -234,6 +234,7 @@
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Teacher\Controllers\CoursesController.cs" />
     <Compile Include="Areas\Teacher\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Teacher\Controllers\StudentsController.cs" />
     <Compile Include="Areas\Teacher\Controllers\TeacherController.cs" />
     <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -314,6 +315,8 @@
     <Content Include="Areas\Teacher\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Teacher\Views\Home\Index.cshtml" />
     <Content Include="Areas\Teacher\Views\Courses\Index.cshtml" />
+    <Content Include="Areas\Teacher\Views\Students\Index.cshtml" />
+    <Content Include="Areas\Teacher\Views\Shared\EditorTemplates\Grade.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
