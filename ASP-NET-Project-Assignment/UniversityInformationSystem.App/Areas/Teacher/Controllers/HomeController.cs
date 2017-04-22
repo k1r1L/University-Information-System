@@ -18,7 +18,7 @@
             this.teachersService = teachersService;
         }
 
-        [Route("index")]
+        [Route]
         public ActionResult Index()
         {
             return View();

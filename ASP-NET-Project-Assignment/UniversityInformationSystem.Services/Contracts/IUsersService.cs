@@ -14,7 +14,7 @@
 
         IQueryable<UserViewModel> GetAll();
 
-        void Update(string userId, string newPassword, UserManager<ApplicationUser> userManager);
+        void Update(UserViewModel userVm, UserManager<ApplicationUser> userManager);
 
         // TODO: Think about that
         //void Delete(string userId);

@@ -4,8 +4,10 @@
     using AutoMapper;
     using Models.EntityModels;
     using Models.EntityModels.Users;
+    using Models.Enums;
     using Models.ViewModels.Account;
     using Models.ViewModels.Admin;
+    using Models.ViewModels.Student;
     using Models.ViewModels.Teacher;
 
     public class MapperConfig
@@ -64,7 +66,30 @@
                         configExpression => configExpression.MapFrom(e => e.IdentityUser.UserName))
                     .ForMember(vm => vm.BirthDate,
                         configExpression => configExpression.MapFrom(e => e.IdentityUser.BirthDate));
-
+                action.CreateMap<Student, StudentProfileViewModel>()
+                    .ForMember(vm => vm.FirstName,
+                        configExpression => configExpression.MapFrom(e => e.IdentityUser.FirstName))
+                    .ForMember(vm => vm.LastName,
+                        configExpression => configExpression.MapFrom(e => e.IdentityUser.LastName))
+                    .ForMember(vm => vm.UserName,
+                        configExpression => configExpression.MapFrom(e => e.IdentityUser.UserName))
+                    .ForMember(vm => vm.BirthDate,
+                        configExpression => configExpression.MapFrom(e => e.IdentityUser.BirthDate))
+                    .ForMember(vm => vm.MandatoryCoursesCount,
+                        configExpression =>
+                                configExpression.MapFrom(e => e.EnrolledCourses.Count(c => !c.Course.IsOpen)))
+                    .ForMember(vm => vm.OpenCoursesCount,
+                        configExpression => configExpression.MapFrom(e => e.EnrolledCourses.Count(c => c.Course.IsOpen)))
+                    .ForMember(vm => vm.TakenCoursesCount,
+                        configExpression =>
+                                configExpression.MapFrom(e => e.EnrolledCourses.Count(c => c.Grade != Grade.F)))
+                    .ForMember(vm => vm.UnTakenCoursesCount,
+                        configExpression =>
+                                configExpression.MapFrom(e => e.EnrolledCourses.Count(c => c.Grade == Grade.F)));
+                action.CreateMap<StudentCourse, MandatoryCourseViewModel>()
+                    .ForMember(vm => vm.CourseName, configExpression => configExpression.MapFrom(e => e.Course.Name))
+                    .ForMember(vm => vm.TeacherUsername,
+                        configExpression => configExpression.MapFrom(e => e.Course.Teacher.IdentityUser.UserName));
             });
         }
     }

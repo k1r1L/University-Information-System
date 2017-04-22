@@ -1,0 +1,41 @@
+﻿@model UniversityInformationSystem.Models.ViewModels.Student.StudentProfileViewModel
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+<div class="container-fluid">
+    <div class="jumbotron">
+        <div style="text-align: center">
+            <div>
+                FIRST NAME: <strong>@Model.FirstName</strong>
+            </div>
+            <div>
+                LAST NAME: <strong>@Model.LastName</strong>
+            </div>
+            <div>
+                BIRTH DATE: <strong>@Model.BirthDate.ToString("dd/MM/yyyy")</strong>
+            </div>
+            <div>
+                USERNAME: <strong>@Model.UserName</strong>
+            </div>
+            <div>
+                FACULTY NUMBER: <strong>@Model.FacultyNumber</strong>
+            </div>
+            <div>
+                MANDATORY COURSES: <strong>@Model.MandatoryCoursesCount</strong>
+            </div>
+            <div>
+                OPEN COURSES: <strong>@Model.OpenCoursesCount</strong>
+            </div>
+            <div>
+                TAKEN COURSES: <strong>@Model.TakenCoursesCount</strong>
+            </div>
+            <div>
+                UNTAKEN COURSES: <strong>@Model.UnTakenCoursesCount</strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+

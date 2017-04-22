@@ -16,7 +16,7 @@
 
         
         // GET: Admin/Home
-        [Route("index")]
+        [Route]
         public ActionResult Index()
         {
             return this.View();

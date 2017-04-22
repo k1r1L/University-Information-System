@@ -83,14 +83,14 @@
 
                     if (roles.Contains("Administrator"))
                     {
-                        return Redirect("/admin/home/index");
+                        return Redirect("/admin/home/");
                     }
                     if (roles.Contains("Teacher")) 
                     {
-                        return Redirect("/teacher/home/index");
+                        return Redirect("/teacher/home/");
                     }
 
-                    return Redirect("/student/home/index");
+                    return Redirect("/student/home/");
 
                 case SignInStatus.LockedOut:
                     return View("Lockout");

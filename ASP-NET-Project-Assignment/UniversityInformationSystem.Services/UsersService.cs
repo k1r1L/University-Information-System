@@ -43,12 +43,14 @@
             return allUserVms.AsQueryable();
         }
 
-        public void Update(string userId, string newPassword, UserManager<ApplicationUser> userManager)
+        public void Update(UserViewModel userVm, UserManager<ApplicationUser> userManager)
         {
             UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(this.userRepository.Context);
-            ApplicationUser user = this.userRepository.GetById(userId);
-            string newPasswordHashed = userManager.PasswordHasher.HashPassword(newPassword);
+            ApplicationUser user = this.userRepository.GetById(userVm.Id);
+            string newPasswordHashed = userManager.PasswordHasher.HashPassword(userVm.Password);
             userStore.SetPasswordHashAsync(user, newPasswordHashed);
+            user.FirstName = userVm.FirstName;
+            user.LastName = userVm.LastName;
             this.userRepository.SaveChanges();
         }
     }

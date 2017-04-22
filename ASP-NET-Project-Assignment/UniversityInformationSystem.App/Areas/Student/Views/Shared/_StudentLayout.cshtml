@@ -19,14 +19,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            @Html.ActionLink("University Information System", "Login", "Account", new { area = "Teacher" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("University Information System", "Login", "Account", new { area = "Student" }, new { @class = "navbar-brand" })
         </div>
-        @Html.Partial("_TeacherPartial")
+        @Html.Partial("_StudentPartial")
     </div>
 </div>
 
 <div class="sidebar">
-    @Html.Partial("_TeacherSidebar")
+    @Html.Partial("_StudentSidebar")
 </div>
 
 <div class="main">

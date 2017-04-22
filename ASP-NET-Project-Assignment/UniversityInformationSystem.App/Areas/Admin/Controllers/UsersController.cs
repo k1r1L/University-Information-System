@@ -116,9 +116,9 @@
         {
             if (userVm != null && this.ModelState.IsValid)
             {
-                if (userVm.Password != userVm.PasswordConfirmed)
+                if (userVm.Password == userVm.PasswordConfirmed)
                 {
-                    this.usersService.Update(userVm.Id, userVm.Password, this.UserManager);
+                    this.usersService.Update(userVm, this.UserManager);
                 }
                 else
                 {
