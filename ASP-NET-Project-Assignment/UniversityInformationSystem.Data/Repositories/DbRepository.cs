@@ -26,7 +26,7 @@
 
         protected IDbSet<T> DbSet { get; set; }
 
-        protected UisDataContext Context { get; set; }
+        public UisDataContext Context { get; }
 
         public virtual IQueryable<T> All()
         {

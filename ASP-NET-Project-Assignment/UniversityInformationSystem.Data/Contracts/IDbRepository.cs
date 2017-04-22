@@ -27,6 +27,8 @@
 
         int SaveChanges();
 
+        UisDataContext Context { get; }
+
         void Attach<TU>(TU entity)
             where TU : class;
     }

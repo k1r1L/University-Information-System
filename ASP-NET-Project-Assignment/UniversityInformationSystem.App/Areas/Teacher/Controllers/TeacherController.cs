@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace UniversityInformationSystem.App.Areas.Teacher.Controllers
 {
-    [RouteArea("Teacher")]
+    [RouteArea("teacher")]
     [Authorize(Roles = "Teacher")]
     public abstract class TeacherController : Controller
     {

@@ -5,7 +5,7 @@
     using System.Web.Mvc;
     using Utillities;
 
-    public class CourseViewModel
+    public class AdminCourseViewModel
     {
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
@@ -28,6 +28,12 @@
         [Display(Name = "Open Course:")]
         [RegularExpression(ValidationConstants.OpenCourseRegex, ErrorMessage = ValidationConstants.ValidationErrorMessages.InvalidOpenCourseValue)]
         public string IsOpen { get; set; }
+
+        [Required]
+        [Range(ValidationConstants.MinCredits, ValidationConstants.MaxCredits,
+             ErrorMessage = ValidationConstants.ValidationErrorMessages.CourseCreditsErrorMsg)]
+        [Display(Name = "Credits:")]
+        public double Credits { get; set; }
 
         [Required]
         [Display(Name = "Teacher:")]

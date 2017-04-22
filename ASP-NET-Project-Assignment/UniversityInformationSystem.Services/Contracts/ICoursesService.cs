@@ -10,11 +10,11 @@
 
     public interface ICoursesService
     {
-        IQueryable<CourseViewModel> GetAll();
+        IQueryable<AdminCourseViewModel> GetAll();
 
-        int Create(CourseViewModel courseViewModel);
+        int Create(AdminCourseViewModel courseViewModel);
 
-        void Update(CourseViewModel courseViewModel);
+        void Update(AdminCourseViewModel courseViewModel);
 
         void Delete(int courseId);
 

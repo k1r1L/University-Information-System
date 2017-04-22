@@ -1,12 +1,13 @@
 ﻿@using UniversityInformationSystem.Models.ViewModels.Admin
-@(Html.Kendo().Grid<UniversityInformationSystem.Models.ViewModels.Admin.CourseViewModel>()
+@(Html.Kendo().Grid<UniversityInformationSystem.Models.ViewModels.Admin.AdminCourseViewModel>()
       .Name("grid")
       .Columns(columns =>
       {
           columns.Bound(c => c.Name);
           columns.Bound(c => c.Description);
-          columns.Bound(c => c.StudentsCount);
+          columns.Bound(c => c.StudentsCount).Width(80);
           columns.Bound(c => c.IsOpen);
+          columns.Bound(c => c.Credits);
           columns.Bound(c => c.Teacher).ClientTemplate("#= teacherDetails(data) #");
           columns.Command(command =>
           {

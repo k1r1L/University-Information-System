@@ -1,0 +1,54 @@
+﻿@using UniversityInformationSystem.Models.ViewModels.Admin
+@(Html.Kendo().Grid<UserViewModel>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.FirstName);
+        columns.Bound(p => p.LastName);
+        columns.Bound(p => p.UserName).Width(120);
+        columns.Command(command =>
+        {
+            command.Edit();
+        });
+    })
+    .Editable(editable => editable.Mode(GridEditMode.PopUp))
+    .Pageable(p =>
+    {
+        p.Refresh(true);
+        p.PageSizes(true);
+        p.ButtonCount(5);
+    })
+    .Sortable()
+    .Scrollable()
+    .Filterable()
+    .HtmlAttributes(new
+    {
+        style = "height:550px;"
+    })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(20)
+        .Events(e => e.Error("error_handler"))
+        .Model(model => model.Id(p => p.Id))
+        .Read(read => read.Action("Users_Read", "Users"))
+        .Update(update => update.Action("Users_Update", "Users"))
+    )
+      )
+
+@section Scripts {
+    <script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>
+}

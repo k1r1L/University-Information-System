@@ -1,4 +1,4 @@
-﻿@model UniversityInformationSystem.Models.ViewModels.Admin.AdminProfileViewModel
+﻿@model UniversityInformationSystem.Models.ViewModels.Teacher.TeacherProfileViewModel
 @{
     ViewBag.Title = "Profile";
 }
@@ -18,9 +18,14 @@
             <div>
                 USERNAME: <strong>@Model.UserName</strong>
             </div>
+            <div>
+                LEADING COURSES COUNT: <strong>@Model.LeadingCoursesCount</strong>
+            </div>
+            <div>
+                STUDENTS COUNT: <strong>@Model.StudentsCount</strong>
+            </div>
         </div>
 
     </div>
 </div>
-
 

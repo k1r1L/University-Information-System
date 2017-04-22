@@ -317,6 +317,8 @@
     <Content Include="Areas\Teacher\Views\Courses\Index.cshtml" />
     <Content Include="Areas\Teacher\Views\Students\Index.cshtml" />
     <Content Include="Areas\Teacher\Views\Shared\EditorTemplates\Grade.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Teacher\Views\Home\Profile.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

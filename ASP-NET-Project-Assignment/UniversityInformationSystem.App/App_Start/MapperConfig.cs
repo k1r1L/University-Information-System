@@ -19,12 +19,12 @@
                 action.CreateMap<Teacher, CourseTeacherViewModel>()
                     .ForMember(ct => ct.UserName,
                         configExpression => configExpression.MapFrom(e => e.IdentityUser.UserName));
-                action.CreateMap<Course, CourseViewModel>()
+                action.CreateMap<Course, AdminCourseViewModel>()
                     .ForMember(c => c.StudentsCount,
                         configExpression => configExpression.MapFrom(e => e.EnrolledStudents.Count))
                     .ForMember(c => c.IsOpen,
                         configExpression => configExpression.MapFrom(e => e.IsOpen ? "Yes" : "No"));
-                action.CreateMap<CourseViewModel, Course>()
+                action.CreateMap<AdminCourseViewModel, Course>()
                     .ForMember(c => c.Teacher, config => config.Ignore());
                 action.CreateMap<StudentCourse, AdminStudentCourseViewModel>()
                     .ForMember(vm => vm.CourseName, configExpression => configExpression.MapFrom(e => e.Course.Name))
@@ -43,6 +43,28 @@
                     .ForMember(vm => vm.StudentId, configExpression => configExpression.MapFrom(e => e.StudentId))
                     .ForMember(vm => vm.CourseId, configExpression => configExpression.MapFrom(e => e.CourseId))
                     .ForMember(vm => vm.Grade, configExpression => configExpression.MapFrom(e => e.Grade));
+                action.CreateMap<ApplicationUser, UserViewModel>()
+                    .ForMember(vm => vm.Id, configExpression => configExpression.MapFrom(e => e.Id))
+                    .ForMember(vm => vm.FirstName, configExpression => configExpression.MapFrom(e => e.FirstName))
+                    .ForMember(vm => vm.LastName, configExpression => configExpression.MapFrom(e => e.LastName))
+                    .ForMember(vm => vm.UserName, configExpression => configExpression.MapFrom(e => e.UserName))
+                    .ForMember(vm => vm.Password, configExpression => configExpression.Ignore())
+                    .ForMember(vm => vm.PasswordConfirmed, configExpression => configExpression.Ignore());
+                action.CreateMap<Teacher, TeacherProfileViewModel>()
+                    .ForMember(vm => vm.LeadingCoursesCount,
+                        configExpression => configExpression.MapFrom(e => e.LeadingCourses.Count))
+                    .ForMember(vm => vm.StudentsCount,
+                        configExpression =>
+                                configExpression.MapFrom(e => e.LeadingCourses.Sum(c => c.EnrolledStudents.Count)))
+                    .ForMember(vm => vm.FirstName,
+                        configExpression => configExpression.MapFrom(e => e.IdentityUser.FirstName))
+                    .ForMember(vm => vm.LastName,
+                        configExpression => configExpression.MapFrom(e => e.IdentityUser.LastName))
+                    .ForMember(vm => vm.UserName,
+                        configExpression => configExpression.MapFrom(e => e.IdentityUser.UserName))
+                    .ForMember(vm => vm.BirthDate,
+                        configExpression => configExpression.MapFrom(e => e.IdentityUser.BirthDate));
+
             });
         }
     }

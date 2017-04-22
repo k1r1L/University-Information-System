@@ -25,6 +25,11 @@
         public string Description { get; set; }
 
         [Required]
+        [Range(ValidationConstants.MinCredits, ValidationConstants.MaxCredits,
+            ErrorMessage = ValidationConstants.ValidationErrorMessages.CourseCreditsErrorMsg)]
+        public double Credits { get; set; }
+
+        [Required]
         public bool IsOpen { get; set; }
 
         public virtual ICollection<StudentCourse> EnrolledStudents { get; set; }

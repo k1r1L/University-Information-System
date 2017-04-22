@@ -114,9 +114,10 @@
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\Admin\AdminProfileViewModel.cs" />
     <Compile Include="ViewModels\Admin\CourseTeacherViewModel.cs" />
-    <Compile Include="ViewModels\Admin\CourseViewModel.cs" />
+    <Compile Include="ViewModels\Admin\AdminCourseViewModel.cs" />
     <Compile Include="ViewModels\Admin\RegisterSuccessViewModel.cs" />
     <Compile Include="ViewModels\Admin\AdminStudentCourseViewModel.cs" />
+    <Compile Include="ViewModels\Admin\UserViewModel.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\ConfigureTwoFactorViewModel.cs" />
@@ -125,7 +126,9 @@
     <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\Teacher\TeacherCourseViewModel.cs" />
+    <Compile Include="ViewModels\Teacher\TeacherProfileViewModel.cs" />
     <Compile Include="ViewModels\Teacher\TeacherStudentCourseViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -57,6 +57,7 @@
             if (courseId != null && !this.coursesService.HasTeacher(courseId.Value))
             {
                 this.ModelState.AddModelError("CourseName", "The given course has no trainer yet!");
+
             }
 
             if (this.ModelState.IsValid)

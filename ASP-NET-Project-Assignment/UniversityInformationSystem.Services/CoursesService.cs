@@ -17,20 +17,21 @@
             this.courses = courses;
         }
 
-        public IQueryable<CourseViewModel> GetAll()
+        public IQueryable<AdminCourseViewModel> GetAll()
         {
             IQueryable<Course> courseEntities = this.courses.All();
-            IEnumerable<CourseViewModel> courseVms = Mapper.Map<IEnumerable<CourseViewModel>>(courseEntities);
+            IEnumerable<AdminCourseViewModel> courseVms = Mapper.Map<IEnumerable<AdminCourseViewModel>>(courseEntities);
 
             return courseVms.AsQueryable();
         }
 
-        public int Create(CourseViewModel courseViewModel)
+        public int Create(AdminCourseViewModel courseViewModel)
         {
             Course courseEntity = new Course()
             {
                 Name = courseViewModel.Name,
                 Description = courseViewModel.Description,
+                Credits = courseViewModel.Credits,
                 IsOpen = courseViewModel.IsOpen == "Yes"
             };
             this.courses.Add(courseEntity);
@@ -38,7 +39,7 @@
             return courseEntity.Id;
         }
 
-        public void Update(CourseViewModel courseViewModel)
+        public void Update(AdminCourseViewModel courseViewModel)
         {
             Course entity = this.courses.GetById(courseViewModel.Id);
             entity.Name = courseViewModel.Name;

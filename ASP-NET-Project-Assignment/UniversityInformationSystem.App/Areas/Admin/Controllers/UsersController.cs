@@ -1,11 +1,14 @@
 ﻿namespace UniversityInformationSystem.App.Areas.Admin.Controllers
 {
     using System;
+    using System.Linq;
     using System.Web;
     using System.Web.Mvc;
     using System.Threading.Tasks;
     using AutoMapper;
     using Data;
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.AspNet.Identity.Owin;
@@ -20,13 +23,15 @@
     {
         private ApplicationUserManager _userManager;
         private IRegisterService registerService;
+        private IUsersService usersService;
 
         // TODO: Inject userManager
-        public UsersController(IRegisterService registerService)
+        public UsersController(IRegisterService registerService, IUsersService usersService ,UisDataContext dbContext)
         {
             this.UserManager = new ApplicationUserManager(
-                new UserStore<ApplicationUser>(new UisDataContext()));
+                new UserStore<ApplicationUser>(dbContext));
             this.registerService = registerService;
+            this.usersService = usersService;
         }
 
         public ApplicationUserManager UserManager
@@ -89,6 +94,40 @@
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        [Route("all")]
+        public ActionResult Index()
+        {
+            return this.View();
+        }
+
+        [Route("Users_Read")]
+        public ActionResult Users_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            IQueryable<UserViewModel> userVms = this.usersService.GetAll();
+
+            return this.Json(userVms.ToDataSourceResult(request));
+        }
+
+        [Route("Users_Update")]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Users_Update([DataSourceRequest]DataSourceRequest request, UserViewModel userVm)
+        {
+            if (userVm != null && this.ModelState.IsValid)
+            {
+                if (userVm.Password != userVm.PasswordConfirmed)
+                {
+                    this.usersService.Update(userVm.Id, userVm.Password, this.UserManager);
+                }
+                else
+                {
+                    this.ModelState.AddModelError("Password", "The passwords do not match!");
+                    return this.Json(request);
+                }
+            }
+
+            return this.Json(new [] { userVm }.ToDataSourceResult(request, this.ModelState));
         }
 
         private void AddErrors(IdentityResult result)

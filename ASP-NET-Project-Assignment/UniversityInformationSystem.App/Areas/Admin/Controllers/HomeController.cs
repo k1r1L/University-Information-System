@@ -1,9 +1,5 @@
 ﻿namespace UniversityInformationSystem.App.Areas.Admin.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
     using Models.ViewModels.Admin;
     using Services.Contracts;
@@ -11,9 +7,9 @@
     [RoutePrefix("home")]
     public class HomeController : AdminController
     {
-        private IUserService userService;
+        private IUsersService userService;
 
-        public HomeController(IUserService userService)
+        public HomeController(IUsersService userService)
         {
             this.userService = userService;
         }

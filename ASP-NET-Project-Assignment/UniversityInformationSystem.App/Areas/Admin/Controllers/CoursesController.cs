@@ -32,19 +32,20 @@
         [Route("CourseViewModels_Read")]
         public ActionResult CourseViewModels_Read([DataSourceRequest]DataSourceRequest request)
         {
-            IQueryable<CourseViewModel> courseviewmodels = this.coursesService.GetAll();
+            IQueryable<AdminCourseViewModel> courseviewmodels = this.coursesService.GetAll();
            
             return Json(courseviewmodels.ToDataSourceResult(request));
         }
 
         [Route("CourseViewModels_Create")]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult CourseViewModels_Create([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CourseViewModel> courses)
+        public ActionResult CourseViewModels_Create([DataSourceRequest]DataSourceRequest request, 
+            [Bind(Prefix = "models")]IEnumerable<AdminCourseViewModel> courses)
         {
-            List<CourseViewModel> results = new List<CourseViewModel>();
+            List<AdminCourseViewModel> results = new List<AdminCourseViewModel>();
             if (courses != null && ModelState.IsValid)
             {
-                foreach (CourseViewModel course in courses)
+                foreach (AdminCourseViewModel course in courses)
                 {
                     int teacherId = course.Teacher.Id;
                     int courseId = this.coursesService.Create(course);
@@ -64,12 +65,13 @@
 
         [Route("CourseViewModels_Update")]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult CourseViewModels_Update([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CourseViewModel> courses)
+        public ActionResult CourseViewModels_Update([DataSourceRequest]DataSourceRequest request, 
+            [Bind(Prefix = "models")]IEnumerable<AdminCourseViewModel> courses)
         {
-            List<CourseViewModel> results = new List<CourseViewModel>();
+            List<AdminCourseViewModel> results = new List<AdminCourseViewModel>();
             if (courses!= null && ModelState.IsValid)
             {
-                foreach (CourseViewModel course in courses)
+                foreach (AdminCourseViewModel course in courses)
                 {
                     if (this.teachersService.TeacherExists(course.Teacher.UserName))
                     {
@@ -87,11 +89,12 @@
 
         [Route("CourseViewModels_Destroy")]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult CourseViewModels_Destroy([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CourseViewModel> courses)
+        public ActionResult CourseViewModels_Destroy([DataSourceRequest]DataSourceRequest request,
+            [Bind(Prefix = "models")]IEnumerable<AdminCourseViewModel> courses)
         {
             if (courses.Any())
             {
-                foreach (CourseViewModel course in courses)
+                foreach (AdminCourseViewModel course in courses)
                 {
                     this.coursesService.Delete(course.Id);
                 }

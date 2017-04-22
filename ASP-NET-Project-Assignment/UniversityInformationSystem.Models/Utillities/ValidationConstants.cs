@@ -2,6 +2,8 @@
 {
     public class ValidationConstants
     {
+        public const double MinCredits = 3;
+        public const double MaxCredits = 18;
         public const int PasswordMinLength = 8;
         public const int PasswordMaxLength = 16;
         public const int CourseNameLength = 50;
@@ -25,8 +27,10 @@
                 = "The course name length should not be more than 50 symbols";
             public const string InvalidCourseDescription
              = "The course name length should not be more than 1000 symbols";
-
-            public const string InvalidOpenCourseValue = "You should type either Yes or No";
+            public const string InvalidOpenCourseValue
+                = "You should type either Yes or No";
+            public const string CourseCreditsErrorMsg
+                = "A course should give between 3 and 18 credits!";
         }
     }
 }
