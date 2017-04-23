@@ -72,12 +72,30 @@
             return courseEntity?.Id;
         }
 
+        public int? GetTeacherIdByCourseName(string courseName)
+        {
+            return this.courses
+                .All()
+                .SingleOrDefault(c => c.Name == courseName)
+                ?.TeacherId;
+        }
+
         public bool HasTeacher(int courseId)
         {
             Course courseEntity = this.courses
                 .GetById(courseId);
 
             return courseEntity.Teacher != null;
+        }
+
+        public IEnumerable<string> GetAllOpenCourses(string studentUsername)
+        {
+            var openCoursesNames = this.courses
+                .All()
+                .Where(c => c.IsOpen && c.EnrolledStudents.All(sc => sc.Student.IdentityUser.UserName != studentUsername))
+                .Select(c => c.Name);
+
+            return openCoursesNames;
         }
     }
 }

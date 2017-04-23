@@ -14,9 +14,9 @@
     [RoutePrefix("mandatorycourses")]
     public class MandatoryCoursesController : StudentController
     {
-        private IMandatoryCoursesService coursesService;
+        private IStudentsCoursesService coursesService;
 
-        public MandatoryCoursesController(IMandatoryCoursesService coursesService)
+        public MandatoryCoursesController(IStudentsCoursesService coursesService)
         {
             this.coursesService = coursesService;
         }
@@ -33,7 +33,7 @@
         public ActionResult Courses_Read([DataSourceRequest] DataSourceRequest request)
         {
             string username = HttpContext.User.Identity.Name;
-            IQueryable<MandatoryCourseViewModel> courseVms = this.coursesService.GetAll(username);
+            IQueryable<MandatoryCourseViewModel> courseVms = this.coursesService.GetAllMandatoryCourses(username);
 
             return this.Json(courseVms.ToDataSourceResult(request));
         }

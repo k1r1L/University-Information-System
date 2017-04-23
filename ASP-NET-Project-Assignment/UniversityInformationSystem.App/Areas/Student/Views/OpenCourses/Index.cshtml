@@ -1,0 +1,70 @@
+﻿@using UniversityInformationSystem.Models.ViewModels.Student
+
+@(Html.Kendo().Grid<OpenCourseViewModel>()
+      .Name("opencoursesgrid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.CourseName).EditorTemplateName("CourseEditor");
+          columns.Bound(c => c.TeacherUsername);
+          columns.Bound(c => c.Grade).Width(80);
+          columns.Command(c =>
+          {
+              c.Destroy();
+          });
+      })
+      .ToolBar(toolbar =>
+      {
+          toolbar.Create();
+          toolbar.Save();
+      })
+      .Editable(editable =>
+      {
+          editable.Mode(GridEditMode.InCell);
+      })
+      .ColumnMenu()
+      .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.MultipleColumn);
+      })
+      .Filterable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .PageSize(5)
+          .Batch(true)
+          .ServerOperation(false)
+          .Model(model =>
+          {
+              model.Id(p => p.CourseId);
+          })
+          .Read(read =>
+          {
+              read.Action("Courses_Read", "OpenCourses");
+          })
+          .Create(create =>
+          {
+              create.Action("Courses_Add", "OpenCourses");
+          })
+          .Update(update =>
+          {
+              update.Action("Courses_Update", "OpenCourses");
+          })
+          .Destroy(destroy =>
+          {
+              destroy.Action("Courses_Destroy", "OpenCourses");
+          })
+      )
+      )
+
+@section Scripts {
+    <script>
+        function onAutcompleteCourseName() {
+            return {
+                courseName: $("#CourseName").val()
+            }
+        }
+    </script>
+}

@@ -12,6 +12,7 @@
     using Models.EntityModels.Users;
     using Models.Enums;
     using Models.ViewModels.Admin;
+    using Models.ViewModels.Student;
 
     public class StudentsCoursesService : IStudentsCoursesService
     {
@@ -29,6 +30,26 @@
             IEnumerable<AdminStudentCourseViewModel> allVms = Mapper.Map<IEnumerable<AdminStudentCourseViewModel>>(allEntities);
 
             return allVms.AsQueryable();
+        }
+
+        public IQueryable<MandatoryCourseViewModel> GetAllMandatoryCourses(string studentUsername)
+        {
+            IQueryable<StudentCourse> mandatoryCourses = this.studentsCourses
+                .All()
+                .Where(sc => sc.Student.IdentityUser.UserName == studentUsername && !sc.Course.IsOpen);
+
+            IEnumerable<MandatoryCourseViewModel> vms = Mapper.Map<IEnumerable<MandatoryCourseViewModel>>(mandatoryCourses);
+            return vms.AsQueryable();
+        }
+
+        public IQueryable<OpenCourseViewModel> GetAllOpenCourses(string studentUsername)
+        {
+            IQueryable<StudentCourse> mandatoryCourses = this.studentsCourses
+                .All()
+                .Where(sc => sc.Student.IdentityUser.UserName == studentUsername && sc.Course.IsOpen);
+
+            IEnumerable<OpenCourseViewModel> vms = Mapper.Map<IEnumerable<OpenCourseViewModel>>(mandatoryCourses);
+            return vms.AsQueryable();
         }
 
         public void Create(int studentId, int courseId)

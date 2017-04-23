@@ -22,6 +22,10 @@
 
         int? GetCourseId(string courseName);
 
+        int? GetTeacherIdByCourseName(string courseName);
+
         bool HasTeacher(int courseId);
+
+        IEnumerable<string> GetAllOpenCourses(string studentUsername);
     }
 }

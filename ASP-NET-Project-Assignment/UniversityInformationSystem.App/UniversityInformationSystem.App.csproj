@@ -234,6 +234,7 @@
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Student\Controllers\HomeController.cs" />
     <Compile Include="Areas\Student\Controllers\MandatoryCoursesController.cs" />
+    <Compile Include="Areas\Student\Controllers\OpenCoursesController.cs" />
     <Compile Include="Areas\Student\Controllers\StudentController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Areas\Teacher\Controllers\CoursesController.cs" />
@@ -310,7 +311,6 @@
     <Content Include="Areas\Student\Views\Shared\EditorTemplates\Number.cshtml" />
     <Content Include="Areas\Student\Views\Shared\EditorTemplates\Password.cshtml" />
     <Content Include="Areas\Student\Views\Shared\EditorTemplates\String.cshtml" />
-    <Content Include="Areas\Student\Views\Shared\EditorTemplates\TeacherEditor.cshtml" />
     <Content Include="Areas\Student\Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Areas\Student\Views\Shared\EditorTemplates\Url.cshtml" />
     <Content Include="Areas\Teacher\Views\Shared\_TeacherPartial.cshtml" />
@@ -346,11 +346,14 @@
     <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Student\Views\Home\Profile.cshtml" />
     <Content Include="Areas\Student\Views\MandatoryCourses\Index.cshtml" />
+    <Content Include="Areas\Student\Views\OpenCourses\Index.cshtml" />
+    <Content Include="Areas\Student\Views\OpenCourses\EditorTemplates\CourseEditor.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Libraries\Kendo.Mvc.dll" />
     <Content Include="Libraries\Kendo.Mvc.xml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\error-handler.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />

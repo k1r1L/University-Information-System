@@ -1,0 +1,14 @@
+﻿@(Html.Kendo().AutoComplete()
+          .Name("CourseName")
+          .MinLength(3)
+          .HtmlAttributes(new { style = "width:250px" })
+          .DataSource(dataSource =>
+          {
+              dataSource.ServerFiltering(true);
+              dataSource.Read(read =>
+              {
+                  read.Action("AutocompleteCourses", "OpenCourses")
+                  .Data("onAutcompleteCourseName");
+              });
+          })
+)

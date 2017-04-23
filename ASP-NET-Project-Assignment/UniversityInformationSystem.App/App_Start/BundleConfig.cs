@@ -15,6 +15,7 @@ namespace UniversityInformationSystem.App
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
+            // Kendo styles and scripts
             bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
                         "~/Scripts/Kendo/kendo.all.min.js", 
                         "~/Scripts/Kendo/kendo.aspnetmvc.min.js"));
@@ -35,6 +36,9 @@ namespace UniversityInformationSystem.App
 
             bundles.Add(new ScriptBundle("~/bundles/sidebar").Include(
                       "~/Scripts/sidebar.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/error-handler").Include(
+                "~/Scripts/error-handler.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/united.bootstrap.min.css",

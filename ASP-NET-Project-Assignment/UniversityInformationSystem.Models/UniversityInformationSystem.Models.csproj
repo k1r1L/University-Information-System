@@ -128,6 +128,7 @@
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\Student\MandatoryCourseViewModel.cs" />
+    <Compile Include="ViewModels\Student\OpenCourseViewModel.cs" />
     <Compile Include="ViewModels\Student\StudentProfileViewModel.cs" />
     <Compile Include="ViewModels\Teacher\TeacherCourseViewModel.cs" />
     <Compile Include="ViewModels\Teacher\TeacherProfileViewModel.cs" />
