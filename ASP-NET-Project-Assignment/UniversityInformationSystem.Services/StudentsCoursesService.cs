@@ -74,5 +74,12 @@
             this.studentsCourses.Delete(studentCourse);
             this.studentsCourses.SaveChanges();
         }
+
+        public bool AlreadyEnrolled(int studentId, int courseId)
+        {
+            return this.studentsCourses
+                .All()
+                .Any(sc => sc.CourseId == courseId && sc.StudentId == studentId);
+        }
     }
 }

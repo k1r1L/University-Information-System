@@ -57,7 +57,11 @@
             if (courseId != null && !this.coursesService.HasTeacher(courseId.Value))
             {
                 this.ModelState.AddModelError("CourseName", "The given course has no trainer yet!");
+            }
 
+            if (this.studentsCoursesService.AlreadyEnrolled(studentId.Value, courseId.Value))
+            {
+                this.ModelState.AddModelError("StudentUsername", "The student is already enrolled in the given course!");
             }
 
             if (this.ModelState.IsValid)
