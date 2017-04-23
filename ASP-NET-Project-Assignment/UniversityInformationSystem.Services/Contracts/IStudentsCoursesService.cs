@@ -18,6 +18,6 @@
 
         void Delete(int studentId, int courseId);
 
-        bool AlreadyEnrolled(int studentId, int courseId);
+        bool AlreadyEnrolled(int? studentId, int? courseId);
     }
 }

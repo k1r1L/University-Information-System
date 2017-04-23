@@ -4,6 +4,7 @@
     using System.Web.Mvc;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
+    using Models.Utillities;
     using Models.ViewModels.Admin;
     using Services.Contracts;
 
@@ -46,22 +47,22 @@
 
             if (studentId == null)
             {
-                this.ModelState.AddModelError("StudentUsername", "No such student!");
+                this.ModelState.AddModelError("StudentUsername", ValidationConstants.ValidationErrorMessages.NoSuchStudentErrorMsg);
             }
 
             if (courseId == null)
             {
-                this.ModelState.AddModelError("CourseName", "No such course!");
+                this.ModelState.AddModelError("CourseName", ValidationConstants.ValidationErrorMessages.NoSuchCourseErrorMsg);
             }
 
             if (courseId != null && !this.coursesService.HasTeacher(courseId.Value))
             {
-                this.ModelState.AddModelError("CourseName", "The given course has no trainer yet!");
+                this.ModelState.AddModelError("CourseName", ValidationConstants.ValidationErrorMessages.CourseHasNoTeacherErrorMsg);
             }
 
-            if (this.studentsCoursesService.AlreadyEnrolled(studentId.Value, courseId.Value))
+            if (this.studentsCoursesService.AlreadyEnrolled(studentId, courseId))
             {
-                this.ModelState.AddModelError("StudentUsername", "The student is already enrolled in the given course!");
+                this.ModelState.AddModelError("StudentUsername", ValidationConstants.ValidationErrorMessages.StudentAlreadyEnrolledMsg);
             }
 
             if (this.ModelState.IsValid)
@@ -71,6 +72,7 @@
 
             return Json(new[] { viewModel }.ToDataSourceResult(request, this.ModelState));
         }
+
 
         [Route("StudentCourse_Destroy")]
         [AcceptVerbs(HttpVerbs.Post)]

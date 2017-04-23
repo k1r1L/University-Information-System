@@ -7,6 +7,7 @@
     using System.Web.Mvc;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
+    using Models.Utillities;
     using Models.ViewModels.Student;
     using Services.Contracts;
 
@@ -55,12 +56,12 @@
                     int? studentId = this.studentsService.GetStudentId(HttpContext.User.Identity.Name);
                     if (courseId == null)
                     {
-                        this.ModelState.AddModelError("CourseName", "Course does not exist!");
+                        this.ModelState.AddModelError("CourseName", ValidationConstants.ValidationErrorMessages.NoSuchCourseErrorMsg);
                     }
 
                     if (studentId == null)
                     {
-                        this.ModelState.AddModelError("StudentId", "Student does not exist!");
+                        this.ModelState.AddModelError("StudentId", ValidationConstants.ValidationErrorMessages.NoSuchStudentErrorMsg);
                     }
 
                     this.studentsCoursesService.Create(studentId.Value, courseId.Value);

@@ -25,23 +25,20 @@
                     </a>
                 </li>
                 <li>
-                    @Html.ActionLink("Mandatory Courses", "Index", "MandatoryCourses")
-                </li>
-                <li>
-                    @Html.ActionLink("Open Courses", "Index", "OpenCourses")
-                </li>
-                <li>
                     <a>
                         Messages<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-envelope"></span>
                     </a>
                 </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
-                    <ul class="dropdown-menu forAnimate" role="menu">
-                        <li>Change Password</li>
-                        <li class="divider"></li>
-                        <li>Change Email</li>
-                    </ul>
+                <li>
+                    <a href="/manage/password">
+                        Settings<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span>
+                    </a>
+                </li>
+                <li>
+                    @Html.ActionLink("Mandatory Courses", "Index", "MandatoryCourses")
+                </li>
+                <li>
+                    @Html.ActionLink("Open Courses", "Index", "OpenCourses")
                 </li>
             </ul>
         </div>

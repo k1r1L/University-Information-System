@@ -31,6 +31,14 @@
                 = "You should type either Yes or No";
             public const string CourseCreditsErrorMsg
                 = "A course should give between 3 and 18 credits!";
+            public const string NoSuchStudentErrorMsg
+                = "No such student!";
+            public const string NoSuchCourseErrorMsg
+                = "No such course!";
+            public const string CourseHasNoTeacherErrorMsg
+                = "The given course has no teacher yet!";
+            public const string StudentAlreadyEnrolledMsg
+                = "The student is already enrolled in the given course!";
         }
     }
 }

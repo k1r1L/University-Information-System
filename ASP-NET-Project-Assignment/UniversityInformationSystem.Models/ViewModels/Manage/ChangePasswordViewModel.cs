@@ -1,29 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UniversityInformationSystem.Models.ViewModels.Manage
+﻿namespace UniversityInformationSystem.Models.ViewModels.Manage
 {
     using System.ComponentModel.DataAnnotations;
+    using Utillities;
 
     public class ChangePasswordViewModel
     {
         [Required]
+        [MinLength(ValidationConstants.PasswordMinLength,
+           ErrorMessage = ValidationConstants.ValidationErrorMessages.PasswordErrorMsg)]
+        [MaxLength(ValidationConstants.PasswordMaxLength,
+           ErrorMessage = ValidationConstants.ValidationErrorMessages.PasswordErrorMsg)]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
-        public string OldPassword { get; set; }
+        [Display(Name = "Current Password:")]
+        public string Password { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [MinLength(ValidationConstants.PasswordMinLength,
+            ErrorMessage = ValidationConstants.ValidationErrorMessages.PasswordErrorMsg)]
+        [MaxLength(ValidationConstants.PasswordMaxLength,
+            ErrorMessage = ValidationConstants.ValidationErrorMessages.PasswordErrorMsg)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "New Password:")]
         public string NewPassword { get; set; }
 
+
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("Password", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Confirm new password:")]
+        [Compare("NewPassword",
+            ErrorMessage = ValidationConstants.ValidationErrorMessages.NonMatchingPassword)]
         public string ConfirmPassword { get; set; }
     }
 }

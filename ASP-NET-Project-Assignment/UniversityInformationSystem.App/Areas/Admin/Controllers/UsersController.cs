@@ -14,6 +14,7 @@
     using Microsoft.AspNet.Identity.Owin;
     using Models.EntityModels.Users;
     using Models.Enums;
+    using Models.Utillities;
     using Models.ViewModels.Account;
     using Models.ViewModels.Admin;
     using Services.Contracts;
@@ -122,7 +123,7 @@
                 }
                 else
                 {
-                    this.ModelState.AddModelError("Password", "The passwords do not match!");
+                    this.ModelState.AddModelError("Password", ValidationConstants.ValidationErrorMessages.NonMatchingPassword);
                     return this.Json(request);
                 }
             }

@@ -75,11 +75,11 @@
             this.studentsCourses.SaveChanges();
         }
 
-        public bool AlreadyEnrolled(int studentId, int courseId)
+        public bool AlreadyEnrolled(int? studentId, int? courseId)
         {
             return this.studentsCourses
                 .All()
-                .Any(sc => sc.CourseId == courseId && sc.StudentId == studentId);
+                .Any(sc => sc.CourseId == courseId.Value && sc.StudentId == studentId.Value);
         }
     }
 }

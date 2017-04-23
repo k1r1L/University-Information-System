@@ -21,13 +21,9 @@
     .Sortable()
     .Scrollable()
     .Filterable()
-    .HtmlAttributes(new
-    {
-        style = "height:550px;"
-    })
     .DataSource(dataSource => dataSource
         .Ajax()
-        .PageSize(20)
+        .PageSize(5)
         .Events(e => e.Error("error_handler"))
         .Model(model => model.Id(p => p.Id))
         .Read(read => read.Action("Users_Read", "Users"))
@@ -35,20 +31,4 @@
     )
       )
 
-@section Scripts {
-    <script type="text/javascript">
-    function error_handler(e) {
-        if (e.errors) {
-            var message = "Errors:\n";
-            $.each(e.errors, function (key, value) {
-                if ('errors' in value) {
-                    $.each(value.errors, function () {
-                        message += this + "\n";
-                    });
-                }
-            });
-            alert(message);
-        }
-    }
-</script>
-}
+@Scripts.Render("~/bundles/error-handler")
