@@ -11,5 +11,7 @@
         public int TakenCoursesCount { get; set; }
 
         public int UnTakenCoursesCount { get; set; }
+
+        public int TotalCredits { get; set; }
     }
 }

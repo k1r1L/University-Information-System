@@ -92,7 +92,7 @@
         {
             var openCoursesNames = this.courses
                 .All()
-                .Where(c => c.IsOpen && c.EnrolledStudents.All(sc => sc.Student.IdentityUser.UserName != studentUsername))
+                .Where(c => c.IsOpen && c.Teacher != null && c.EnrolledStudents.All(sc => sc.Student.IdentityUser.UserName != studentUsername))
                 .Select(c => c.Name);
 
             return openCoursesNames;

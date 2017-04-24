@@ -77,15 +77,19 @@
                         configExpression => configExpression.MapFrom(e => e.IdentityUser.BirthDate))
                     .ForMember(vm => vm.MandatoryCoursesCount,
                         configExpression =>
-                                configExpression.MapFrom(e => e.EnrolledCourses.Count(c => !c.Course.IsOpen)))
+                            configExpression.MapFrom(e => e.EnrolledCourses.Count(c => !c.Course.IsOpen)))
                     .ForMember(vm => vm.OpenCoursesCount,
                         configExpression => configExpression.MapFrom(e => e.EnrolledCourses.Count(c => c.Course.IsOpen)))
                     .ForMember(vm => vm.TakenCoursesCount,
                         configExpression =>
-                                configExpression.MapFrom(e => e.EnrolledCourses.Count(c => c.Grade != Grade.F)))
+                            configExpression.MapFrom(e => e.EnrolledCourses.Count(c => c.Grade != Grade.F)))
                     .ForMember(vm => vm.UnTakenCoursesCount,
                         configExpression =>
-                                configExpression.MapFrom(e => e.EnrolledCourses.Count(c => c.Grade == Grade.F)));
+                            configExpression.MapFrom(e => e.EnrolledCourses.Count(c => c.Grade == Grade.F)))
+                    .ForMember(vm => vm.TotalCredits,
+                        configExpression =>
+                            configExpression.MapFrom(e => e.EnrolledCourses.Where(c => c.Grade != Grade.F)
+                            .Sum(c => c.Course.Credits)));
                 action.CreateMap<StudentCourse, MandatoryCourseViewModel>()
                     .ForMember(vm => vm.CourseName, configExpression => configExpression.MapFrom(e => e.Course.Name))
                     .ForMember(vm => vm.TeacherUsername,
