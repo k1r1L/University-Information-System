@@ -27,5 +27,7 @@
         bool HasTeacher(int courseId);
 
         IEnumerable<string> GetAllOpenCourses(string studentUsername);
+
+        IEnumerable<string> GetAllCoursesForStudent(string studentUsername);
     }
 }

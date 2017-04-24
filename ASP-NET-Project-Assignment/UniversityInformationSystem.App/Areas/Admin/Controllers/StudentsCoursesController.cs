@@ -1,5 +1,6 @@
 ﻿namespace UniversityInformationSystem.App.Areas.Admin.Controllers
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using Kendo.Mvc.Extensions;
@@ -40,52 +41,88 @@
         [Route("StudentCourse_Create")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult StudentCourse_Create([DataSourceRequest] DataSourceRequest request,
-            AdminStudentCourseViewModel viewModel)
+            [Bind(Prefix = "models")]IEnumerable<AdminStudentCourseViewModel> viewModels)
         {
-            int? studentId = this.studentsService.GetStudentId(viewModel.StudentUsername);
-            int? courseId = this.coursesService.GetCourseId(viewModel.CourseName);
-
-            if (studentId == null)
+            List<AdminStudentCourseViewModel> results = new List<AdminStudentCourseViewModel>();
+            if (viewModels != null && this.ModelState.IsValid)
             {
-                this.ModelState.AddModelError("StudentUsername", ValidationConstants.ValidationErrorMessages.NoSuchStudentErrorMsg);
+                foreach (AdminStudentCourseViewModel studentCourseViewModel in viewModels)
+                {
+                    int? studentId = this.studentsService.GetStudentId(studentCourseViewModel.StudentUsername);
+                    int? courseId = this.coursesService.GetCourseId(studentCourseViewModel.CourseName);
+                    if (!this.studentsCoursesService.AlreadyEnrolled(studentId, courseId))
+                    {
+                        this.studentsCoursesService.Create(studentId.Value, courseId.Value);
+                    }
+
+                    results.Add(studentCourseViewModel);
+                }
             }
 
-            if (courseId == null)
-            {
-                this.ModelState.AddModelError("CourseName", ValidationConstants.ValidationErrorMessages.NoSuchCourseErrorMsg);
-            }
-
-            if (courseId != null && !this.coursesService.HasTeacher(courseId.Value))
-            {
-                this.ModelState.AddModelError("CourseName", ValidationConstants.ValidationErrorMessages.CourseHasNoTeacherErrorMsg);
-            }
-
-            if (this.studentsCoursesService.AlreadyEnrolled(studentId, courseId))
-            {
-                this.ModelState.AddModelError("StudentUsername", ValidationConstants.ValidationErrorMessages.StudentAlreadyEnrolledMsg);
-            }
-
-            if (this.ModelState.IsValid)
-            {
-                this.studentsCoursesService.Create(studentId.Value, courseId.Value);
-            }
-
-            return Json(new[] { viewModel }.ToDataSourceResult(request, this.ModelState));
+            return Json(results.ToDataSourceResult(request, this.ModelState));
         }
 
+        [Route("StudentCourse_Update")]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult StudentCourse_Update([DataSourceRequest] DataSourceRequest request,
+          [Bind(Prefix = "models")]IEnumerable<AdminStudentCourseViewModel> viewModels)
+        {
+            List<AdminStudentCourseViewModel> results = new List<AdminStudentCourseViewModel>();
+            if (viewModels != null && this.ModelState.IsValid)
+            {
+                // TODO: Implement this
+            }
+
+            return Json(results.ToDataSourceResult(request, this.ModelState));
+        }
 
         [Route("StudentCourse_Destroy")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult StudentCourse_Destroy([DataSourceRequest] DataSourceRequest request,
-            AdminStudentCourseViewModel viewModel)
+           [Bind(Prefix = "models")]IEnumerable<AdminStudentCourseViewModel> viewModels)
         {
-            if (ModelState.IsValid)
+            List<AdminStudentCourseViewModel> results = new List<AdminStudentCourseViewModel>();
+            if (viewModels != null && this.ModelState.IsValid)
             {
-                this.studentsCoursesService.Delete(viewModel.StudentId, viewModel.CourseId);
+                foreach (AdminStudentCourseViewModel studentCourseViewModel in viewModels)
+                {
+                    this.studentsCoursesService.Delete(studentCourseViewModel.StudentId, studentCourseViewModel.CourseId);
+                }
             }
 
-            return Json(new[] {viewModel}.ToDataSourceResult(request, this.ModelState));
+            return Json(results.ToDataSourceResult(request, this.ModelState));
         }
 
+        [Route("GetAllStudents")]
+        public ActionResult GetAllStudents(string username)
+        {
+            if (username == null)
+            {
+                return this.RedirectToAction("Index");
+            }
+
+            string[] studentUsernames = this.studentsService
+                .GetAllStudentUsernames()
+                .Where(u => u.ToLower().Contains(username.ToLower()))
+                .ToArray();
+
+            return this.Json(studentUsernames, JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("GetAllCoursesForStudent")]
+        public ActionResult GetAllCoursesForStudent(string courseName, string username)
+        {
+            if (courseName == null)
+            {
+                return this.RedirectToAction("Index");
+            }
+
+            string[] allCoursesForStudents = this.coursesService
+                .GetAllCoursesForStudent(username)
+                .Where(c => c.ToLower().Contains(courseName.ToLower()))
+                .ToArray();
+
+            return this.Json(allCoursesForStudents, JsonRequestBehavior.AllowGet);
+        }
     }
 }

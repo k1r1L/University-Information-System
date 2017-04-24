@@ -97,5 +97,13 @@
 
             return openCoursesNames;
         }
+
+        public IEnumerable<string> GetAllCoursesForStudent(string studentUsername)
+        {
+            return this.courses
+                .All()
+                .Where(c => c.EnrolledStudents.All(sc => sc.Student.IdentityUser.UserName != studentUsername))
+                .Select(c => c.Name);
+        }
     }
 }

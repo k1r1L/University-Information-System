@@ -7,8 +7,8 @@
               dataSource.ServerFiltering(true);
               dataSource.Read(read =>
               {
-                  read.Action("GetAllCourses", "OpenCourses")
-                  .Data("onAutcompleteCourseName");
+                  read.Action("GetAllCoursesForStudent", "StudentsCourses")
+                      .Data("onAutoCompleteCourses");
               });
           })
 )

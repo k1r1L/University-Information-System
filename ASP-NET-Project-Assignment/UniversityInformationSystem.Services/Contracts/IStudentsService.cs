@@ -1,5 +1,6 @@
 ﻿namespace UniversityInformationSystem.Services.Contracts
 {
+    using System.Collections.Generic;
     using Models.EntityModels.Users;
     using Models.ViewModels.Student;
 
@@ -10,5 +11,7 @@
         StudentProfileViewModel GetStudentProfileViewModel(string username);
 
         int? GetStudentId(string username);
+
+        IEnumerable<string> GetAllStudentUsernames();
     }
 }

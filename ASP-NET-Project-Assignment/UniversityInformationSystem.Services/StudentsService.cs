@@ -1,5 +1,6 @@
 ﻿namespace UniversityInformationSystem.Services
 {
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using AutoMapper;
@@ -38,6 +39,13 @@
                 .SingleOrDefault(s => s.IdentityUser.UserName == username);
 
             return studentEntity?.Id;
+        }
+
+        public IEnumerable<string> GetAllStudentUsernames()
+        {
+            return this.students
+                .All()
+                .Select(s => s.IdentityUser.UserName);
         }
     }
 }

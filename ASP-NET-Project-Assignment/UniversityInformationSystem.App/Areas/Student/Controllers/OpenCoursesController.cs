@@ -102,9 +102,15 @@
             return Json(openCourseVms.ToDataSourceResult(request, this.ModelState));
         }
 
-        [Route("AutocompleteCourses")]
-        public ActionResult AutocompleteCourses(string courseName)
+
+        [Route("GetAllCourses")]
+        public ActionResult GetAllCourses(string courseName)
         {
+            if (courseName == null)
+            {
+                return this.RedirectToAction("Index");
+            }
+
             string username = HttpContext.User.Identity.Name;
             var courses =
                 this.coursesService.GetAllOpenCourses(username)

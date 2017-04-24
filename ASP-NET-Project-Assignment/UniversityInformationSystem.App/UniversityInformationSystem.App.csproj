@@ -349,6 +349,8 @@
     <Content Include="Areas\Student\Views\MandatoryCourses\Index.cshtml" />
     <Content Include="Areas\Student\Views\OpenCourses\Index.cshtml" />
     <Content Include="Areas\Student\Views\OpenCourses\EditorTemplates\CourseEditor.cshtml" />
+    <Content Include="Areas\Admin\Views\StudentsCourses\EditorTemplates\CourseEditor.cshtml" />
+    <Content Include="Areas\Admin\Views\StudentsCourses\EditorTemplates\StudentEditor.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Libraries\Kendo.Mvc.dll" />
     <Content Include="Libraries\Kendo.Mvc.xml" />

@@ -3,8 +3,8 @@
       .Name("studentscoursesgrid")
       .Columns(columns =>
       {
-          columns.Bound(c => c.StudentUsername);
-          columns.Bound(c => c.CourseName);
+          columns.Bound(c => c.StudentUsername).EditorTemplateName("StudentEditor");
+          columns.Bound(c => c.CourseName).EditorTemplateName("CourseEditor");
           columns.Command(command =>
           {
               command.Destroy();
@@ -13,6 +13,7 @@
       .ToolBar(toolbar =>
       {
           toolbar.Create();
+          toolbar.Save();
       })
       .ColumnMenu()
       .Pageable(pageable => pageable
@@ -23,19 +24,37 @@
       {
           sortable.SortMode(GridSortMode.SingleColumn);
       })
-      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Editable(editable => editable.Mode(GridEditMode.InCell))
       .Filterable()
       .DataSource(dataSource => dataSource
           .Ajax()
           .PageSize(5)
+          .Batch(true)
+          .ServerOperation(false)
           .Model(model =>
           {
               model.Id(sc => sc.StudentId);
           })
           .Read(read => read.Action("StudentCourse_Read", "StudentsCourses"))
           .Create(create => create.Action("StudentCourse_Create", "StudentsCourses"))
+          .Update(update => update.Action("StudentCourse_Update", "StudentsCourses"))
           .Destroy(destroy => destroy.Action("StudentCourse_Destroy", "StudentsCourses"))
-          .Events(e => e.Error("error_handler"))
       ))
 
-@Scripts.Render("~/bundles/error-handler")
+@section Scripts {
+    <script>
+        function onAutoCompleteCourses() {
+            return {
+                courseName: $("#CourseName").val()
+            }
+        }
+        function onAutoCompleteUsername() {
+            return {
+                username: $("#StudentUsername").val()
+            }
+        }
+    </script>
+
+}
+
+
