@@ -4,48 +4,79 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title University Learning System</title>
+    @Styles.Render("~/Content/kendo-css")
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/login-form.css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/kendo")
 
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @if (User.IsInRole("Administrator"))
-                {
-                    @Html.ActionLink("University Information System", "Index", "Home", new { area = "Admin" }, new { @class = "navbar-brand" })
-                }
-                else if (User.IsInRole("Teacher"))
-                {
-                    @Html.ActionLink("University Information System", "Index", "Home", new { area = "Teacher" }, new { @class = "navbar-brand" })
-                }
-                else if (User.IsInRole("Student"))
-                {
-                    @Html.ActionLink("University Information System", "Index", "Home", new { area = "Student" }, new { @class = "navbar-brand" })
-                }
-                else
-                {
-                    @Html.ActionLink("University Information System", "Login", "Account", new { @class = "navbar-brand" })
-                }
-            </div>
-            @Html.Partial("_LoginPartial")
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @if (User.IsInRole("Administrator"))
+            {
+                @Html.ActionLink("University Information System", "Index", "Home", new { area = "Admin" }, new { @class = "navbar-brand" })
+            }
+            else if (User.IsInRole("Teacher"))
+            {
+                @Html.ActionLink("University Information System", "Index", "Home", new { area = "Teacher" }, new { @class = "navbar-brand" })
+            }
+            else if (User.IsInRole("Student"))
+            {
+                @Html.ActionLink("University Information System", "Index", "Home", new { area = "Student" }, new { @class = "navbar-brand" })
+            }
+            else
+            {
+                @Html.ActionLink("University Information System", "Login", "Account", new { @class = "navbar-brand" })
+            }
         </div>
+        @if (User.IsInRole("Administrator"))
+        {
+            @Html.Partial("~/Areas/Admin/Views/Shared/_AdminPartial.cshtml")
+        }
+        else if (User.IsInRole("Teacher"))
+        {
+            @Html.Partial("~/Areas/Teacher/Views/Shared/_TeacherPartial.cshtml")
+        }
+        else if (User.IsInRole("Student"))
+        {
+            @Html.Partial("~/Areas/Student/Views/Shared/_StudentPartial.cshtml")
+        }
+        else
+        {
+            @Html.Partial("_LoginPartial")
+        }
     </div>
-    <div class="container body-content">
+</div>
+    <div class="sidebar">
+        @if (User.IsInRole("Administrator"))
+        {
+            @Html.Partial("~/Areas/Admin/Views/Shared/_AdminSidebar.cshtml")
+        }
+        else if (User.IsInRole("Teacher"))
+        {
+            @Html.Partial("~/Areas/Teacher/Views/Shared/_TeacherSidebar.cshtml")
+        }
+        else if (User.IsInRole("Student"))
+        {
+            @Html.Partial("~/Areas/Student/Views/Shared/_StudentSidebar.cshtml")
+        }
+    </div>
+    <div class="main">
         @RenderBody()
-        <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - University Information System (Made By Kiril Kirilov)</p>
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

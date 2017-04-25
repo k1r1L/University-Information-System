@@ -1,5 +1,6 @@
 ﻿namespace UniversityInformationSystem.Services.Contracts
 {
+    using System.Collections.Generic;
     using System.Linq;
     using Microsoft.AspNet.Identity;
     using Models.EntityModels.Users;
@@ -18,5 +19,7 @@
 
         // TODO: Think about that
         //void Delete(string userId);
+
+        IEnumerable<string> GetAllUsernames(string current);
     }
 }

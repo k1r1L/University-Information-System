@@ -53,5 +53,13 @@
             user.LastName = userVm.LastName;
             this.userRepository.SaveChanges();
         }
+
+        public IEnumerable<string> GetAllUsernames(string current)
+        {
+            return this.userRepository
+                .All()
+                .Where(u => u.UserName != current)
+                .Select(u => u.UserName);
+        }
     }
 }

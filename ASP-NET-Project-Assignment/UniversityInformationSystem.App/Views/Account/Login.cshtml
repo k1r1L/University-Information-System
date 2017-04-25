@@ -4,7 +4,7 @@
 }
 
 <div style="text-align: center">
-    <h2>Welcome to the System!</h2><br/>
+    <h2>Welcome to the System!</h2><br />
     <h2>Please Log in.</h2>
 </div>
 
@@ -14,17 +14,18 @@
         {
             @Html.AntiForgeryToken()
             <div class="row">
-                <span class="cspan fontawesome-user"></span>
                 <div>
                     @Html.TextBoxFor(m => m.UserName, new { @placeholder = "Username" })<br />
                     @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "text-danger" })
                 </div>
-
-                <span class="cspan fontawesome-lock"></span>
-                @Html.PasswordFor(m => m.Password, new { @placeholder = "Password" })
-                @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
-                <input type="submit" value="Login">
             </div>
+            <div class="row">
+                @Html.PasswordFor(m => m.Password, new { @placeholder = "Password" })
+                <div class="col-sm-12">
+                    @Html.ValidationMessageFor(m => m.Password, null, new {@class = "text-danger"})
+                </div>
+            </div>
+            <input type="submit" value="Login">
         }
     </div>
 </div>

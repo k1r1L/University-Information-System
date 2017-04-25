@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityModels\Course.cs" />
+    <Compile Include="EntityModels\Message.cs" />
     <Compile Include="EntityModels\StudentCourse.cs" />
     <Compile Include="EntityModels\Users\ApplicationUser.cs" />
     <Compile Include="EntityModels\Users\Student.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="ViewModels\Admin\AdminStudentCourseViewModel.cs" />
     <Compile Include="ViewModels\Admin\UserViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\Messages\CreateMessageViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\Student\MandatoryCourseViewModel.cs" />
     <Compile Include="ViewModels\Student\OpenCourseViewModel.cs" />

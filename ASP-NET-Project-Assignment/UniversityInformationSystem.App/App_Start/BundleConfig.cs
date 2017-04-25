@@ -15,6 +15,10 @@ namespace UniversityInformationSystem.App
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
+            // Ajax validate
+            bundles.Add(new ScriptBundle("~/bundles/jqueryajax").Include(
+                    "~/Scripts/jquery.unobtrusive-ajax.js"));
+
             // Kendo styles and scripts
             bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
                         "~/Scripts/Kendo/kendo.all.min.js", 

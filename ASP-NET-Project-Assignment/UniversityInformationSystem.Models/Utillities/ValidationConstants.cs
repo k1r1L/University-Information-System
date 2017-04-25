@@ -9,6 +9,7 @@
         public const int CourseNameLength = 50;
         public const int FacultyNumberLength = 10;
         public const int CourseDescriptionLength = 1000;
+        public const int MessageTextLength = 500;
         public const string AppUserNameRegex = "^[A-Za-z]+$";
         public const string UserNameRegex = @"^[a-z\d]{5,10}$";
         public const string OpenCourseRegex = "^(Yes|No)$";

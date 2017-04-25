@@ -24,9 +24,10 @@ namespace UniversityInformationSystem.Data
 
         public virtual IDbSet<StudentCourse> StudentsCourses { get; set; }
 
+        public virtual IDbSet<Message> Messages { get; set; }
+
         public static UisDataContext Create()
-        {
-            
+        {      
             return new UisDataContext();
         }
 
