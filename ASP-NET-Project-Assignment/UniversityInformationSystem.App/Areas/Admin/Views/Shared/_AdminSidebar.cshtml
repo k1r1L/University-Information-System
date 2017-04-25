@@ -35,16 +35,16 @@
                     </a>
                 </li>
                 <li>
-                    @Html.ActionLink("Register Someone", "Register", "Users")
+                    @Html.ActionLink("Register Someone", "Register", "Users", new { Area = "Admin"}, new {})
                 </li>
                 <li>
-                    @Html.ActionLink("Courses", "Index", "Courses")
+                    @Html.ActionLink("Courses", "Index", "Courses", new { Area = "Admin" }, new { })
                 </li>
                 <li>
-                    @Html.ActionLink("Students & Courses", "Index", "StudentsCourses")
+                    @Html.ActionLink("Students & Courses", "Index", "StudentsCourses", new { Area = "Admin" }, new { })
                 </li>
                 <li>
-                    @Html.ActionLink("All Users", "Index", "Users")
+                    @Html.ActionLink("All Users", "Index", "Users", new { Area = "Admin" }, new { })
                 </li>
             </ul>
         </div>

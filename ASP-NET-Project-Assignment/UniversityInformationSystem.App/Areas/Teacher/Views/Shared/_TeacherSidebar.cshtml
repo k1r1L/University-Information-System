@@ -35,10 +35,10 @@
                     </a>
                 </li>
                 <li>
-                    @Html.ActionLink("My Courses", "Index", "Courses")
+                    @Html.ActionLink("My Courses", "Index", "Courses", new { Area = "Teacher" }, new { })
                 </li>
                 <li>
-                    @Html.ActionLink("My Students", "Index", "Students")
+                    @Html.ActionLink("My Students", "Index", "Students", new { Area = "Teacher" }, new { })
                 </li>
             </ul>
         </div>

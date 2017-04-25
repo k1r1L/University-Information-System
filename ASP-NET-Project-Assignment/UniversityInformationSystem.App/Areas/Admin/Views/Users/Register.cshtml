@@ -6,7 +6,7 @@
     <h2>REGISTER SOMEONE INTO THE SYSTEM</h2>
     <hr />
 </div>
-<div class="col-lg-offset-3 col-m-offset-3 col-sm-offset-3">
+<div class="col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
     @using (Html.BeginForm("Register", "Users", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
     {
         @Html.AntiForgeryToken()
