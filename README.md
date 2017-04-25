@@ -19,3 +19,6 @@ The application is split into four parts
 * Student area
     * Students can view their mandatory courses
     * Students can add open courses to their program
+* Additional
+    * Each user has a profile page
+    * Users can send each other messages
