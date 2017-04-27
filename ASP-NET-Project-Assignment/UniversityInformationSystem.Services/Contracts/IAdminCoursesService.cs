@@ -1,14 +1,10 @@
 ﻿namespace UniversityInformationSystem.Services.Contracts
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Models.EntityModels;
     using Models.ViewModels.Admin;
 
-    public interface ICoursesService
+    public interface IAdminCoursesService
     {
         IQueryable<AdminCourseViewModel> GetAll();
 
@@ -29,5 +25,11 @@
         IEnumerable<string> GetAllOpenCourses(string studentUsername);
 
         IEnumerable<string> GetAllCoursesForStudent(string studentUsername);
+
+        IQueryable<CourseTeacherViewModel> GetAllTeachersForCourses();
+
+        CourseTeacherViewModel GetFirstTeacher();
+
+        bool TeacherExists(string teacherUsername);
     }
 }

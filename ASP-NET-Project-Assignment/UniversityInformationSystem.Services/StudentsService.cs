@@ -1,7 +1,6 @@
 ﻿namespace UniversityInformationSystem.Services
 {
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Linq;
     using AutoMapper;
     using Contracts;
@@ -9,18 +8,17 @@
     using Models.EntityModels.Users;
     using Models.ViewModels.Student;
 
-    public class StudentsService : IStudentsService
+    public class StudentsService : Service, IStudentsService
     {
-        private IDbRepository<Student> students;
 
-        public StudentsService(IDbRepository<Student> students)
+        public StudentsService(IUisDataContext dbContext)
+            : base(dbContext)
         {
-            this.students = students;
         }
 
         public Student GetStudentByUsername(string username)
         {
-            return this.students
+            return this.StudentRepository
                 .All()
                 .Single(s => s.IdentityUser.UserName == username);
         }
@@ -34,7 +32,7 @@
 
         public int? GetStudentId(string username)
         {
-            Student studentEntity = this.students
+            Student studentEntity = this.StudentRepository
                 .All()
                 .SingleOrDefault(s => s.IdentityUser.UserName == username);
 
@@ -43,7 +41,7 @@
 
         public IEnumerable<string> GetAllStudentUsernames()
         {
-            return this.students
+            return this.StudentRepository
                 .All()
                 .Select(s => s.IdentityUser.UserName);
         }

@@ -8,8 +8,10 @@
 
     public interface IMessagesService
     {
-        void Create(string senderId, string reveiverId, string messageText);
+        void Create(string senderUsername, string receiverUsername, string messageText);
 
         void Delete(int messageId);
+
+        IEnumerable<string> GetAllUsernames(string current);
     }
 }

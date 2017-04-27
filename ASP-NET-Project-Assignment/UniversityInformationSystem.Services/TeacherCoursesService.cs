@@ -11,18 +11,16 @@
     using Models.EntityModels;
     using Models.ViewModels.Teacher;
 
-    public class TeacherCoursesService : ITeacherCoursesService
+    public class TeacherCoursesService : Service, ITeacherCoursesService
     {
-        private IDbRepository<Course> courses;
-
-        public TeacherCoursesService(IDbRepository<Course> courses)
+        public TeacherCoursesService(IUisDataContext dbContext)
+            : base(dbContext)
         {
-            this.courses = courses;
         }
 
         public IQueryable<TeacherCourseViewModel> GetAll(string teacherUsername)
         {
-            IQueryable<Course> coursesByTeacher = this.courses
+            IQueryable<Course> coursesByTeacher = this.CoursesRepository
                 .All()
                 .Where(c => c.Teacher.IdentityUser.UserName == teacherUsername);
 
@@ -33,11 +31,10 @@
 
         public void Update(TeacherCourseViewModel vm)
         {
-            Course courseEntity = this.courses.GetById(vm.Id);
+            Course courseEntity = this.CoursesRepository.GetById(vm.Id);
             courseEntity.Name = vm.Name;
             courseEntity.Description = vm.Description;
-            this.courses.Update(courseEntity);
-            this.courses.SaveChanges();
+            this.SaveChanges();
         }
     }
 }

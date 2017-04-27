@@ -113,6 +113,7 @@
     <Compile Include="ViewModels\Admin\AdminStudentCourseViewModel.cs" />
     <Compile Include="ViewModels\Admin\UserViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\Messages\CreateMessageSuccessViewModel.cs" />
     <Compile Include="ViewModels\Messages\CreateMessageViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\Student\MandatoryCourseViewModel.cs" />

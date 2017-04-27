@@ -399,6 +399,7 @@
     <Content Include="Scripts\Kendo\kendo.aspnetmvc.min.js.map" />
     <Content Include="Views\Messages\Create.cshtml" />
     <Content Include="Views\Shared\_UsernamesResult.cshtml" />
+    <Content Include="Views\Messages\SuccessfulCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UniversityInformationSystem.Data\UniversityInformationSystem.Data.csproj">

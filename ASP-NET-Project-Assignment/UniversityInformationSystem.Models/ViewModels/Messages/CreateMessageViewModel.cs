@@ -14,5 +14,7 @@
         [StringLength(ValidationConstants.MessageTextLength)]
         [Display(Name = "Message text:")]
         public string Text { get; set; }
+
+        public string SuccessfullSend { get; set; }
     }
 }

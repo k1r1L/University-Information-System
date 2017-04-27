@@ -25,5 +25,7 @@
             where TEntity : class;
 
         int SaveChanges();
+
+        DbContext DbContext { get; }
     }
 }

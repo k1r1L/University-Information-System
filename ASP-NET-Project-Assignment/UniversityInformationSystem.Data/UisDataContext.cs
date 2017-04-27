@@ -26,6 +26,8 @@ namespace UniversityInformationSystem.Data
 
         public virtual IDbSet<Message> Messages { get; set; }
 
+        public DbContext DbContext => this;
+
         public static UisDataContext Create()
         {      
             return new UisDataContext();

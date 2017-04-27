@@ -11,20 +11,18 @@
     [RoutePrefix("courses")]
     public class CoursesController : AdminController
     {
-        private ICoursesService coursesService;
-        private ITeachersService teachersService;
+        private IAdminCoursesService coursesService;
 
-        public CoursesController(ICoursesService coursesService, ITeachersService teachersService)
+        public CoursesController(IAdminCoursesService coursesService)
         {
             this.coursesService = coursesService;
-            this.teachersService = teachersService;
         }
 
         [Route("all")]
         public ActionResult Index()
         {
-            ViewData["teachers"] = this.teachersService.GetAllTeachersForCourses();
-            ViewData["defaultTeacher"] = this.teachersService.GetFirst();
+            ViewData["teachers"] = this.coursesService.GetAllTeachersForCourses();
+            ViewData["defaultTeacher"] = this.coursesService.GetFirstTeacher();
 
             return View();
         }
@@ -50,7 +48,7 @@
                     int teacherId = course.Teacher.Id;
                     int courseId = this.coursesService.Create(course);
 
-                    if (this.teachersService.TeacherExists(course.Teacher.UserName))
+                    if (this.coursesService.TeacherExists(course.Teacher.UserName))
                     {
                         this.coursesService.AddTeacher(teacherId, courseId);
                     }
@@ -73,7 +71,7 @@
             {
                 foreach (AdminCourseViewModel course in courses)
                 {
-                    if (this.teachersService.TeacherExists(course.Teacher.UserName))
+                    if (this.coursesService.TeacherExists(course.Teacher.UserName))
                     {
                         this.coursesService.AddTeacher(course.Teacher.Id, course.Id);
                     }

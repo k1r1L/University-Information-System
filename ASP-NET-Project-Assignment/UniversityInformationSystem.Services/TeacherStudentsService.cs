@@ -1,28 +1,23 @@
 ﻿namespace UniversityInformationSystem.Services
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using AutoMapper;
     using Contracts;
     using Data.Contracts;
     using Models.EntityModels;
     using Models.ViewModels.Teacher;
 
-    public class TeacherStudentsService : ITeacherStudentsService
+    public class TeacherStudentsService : Service, ITeacherStudentsService
     {
-        private IDbRepository<StudentCourse> studentsCourses;
-
-        public TeacherStudentsService(IDbRepository<StudentCourse> studentsCourses)
+        public TeacherStudentsService(IUisDataContext dbContext)
+            : base(dbContext)
         {
-            this.studentsCourses = studentsCourses;
         }
 
         public IQueryable<TeacherStudentCourseViewModel> GetAll(string teacherName)
         {
-            IQueryable<StudentCourse> teacherStudents = this.studentsCourses
+            IQueryable<StudentCourse> teacherStudents = this.StudentsCoursesRepository
                 .All()
                 .Where(sc => sc.Course.Teacher.IdentityUser.UserName == teacherName);
 
@@ -32,12 +27,11 @@
 
         public void Update(TeacherStudentCourseViewModel vm)
         {
-            StudentCourse studentCourseEntity = this.studentsCourses
+            StudentCourse studentCourseEntity = this.StudentsCoursesRepository
                 .All()
                 .Single(sc => sc.CourseId == vm.CourseId && sc.StudentId == vm.StudentId);
             studentCourseEntity.Grade = vm.Grade;
-            this.studentsCourses.Update(studentCourseEntity);
-            this.studentsCourses.SaveChanges();
+            this.SaveChanges();
         }
     }
 }

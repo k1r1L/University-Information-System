@@ -6,7 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public interface IDbRepository<T> : IDisposable
+    public interface IDbRepository<T>
         where T : class
     {
         IQueryable<T> All();
@@ -15,21 +15,8 @@
 
         void Add(T entity);
 
-        void Update(T entity);
-
         void Delete(T entity);
 
         void Delete(object id);
-
-        T Attach(T entity);
-
-        void Detach(T entity);
-
-        int SaveChanges();
-
-        UisDataContext Context { get; }
-
-        void Attach<TU>(TU entity)
-            where TU : class;
     }
 }

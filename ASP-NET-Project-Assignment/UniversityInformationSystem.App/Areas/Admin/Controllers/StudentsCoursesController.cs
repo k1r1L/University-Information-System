@@ -13,14 +13,10 @@
     public class StudentsCoursesController : AdminController
     {
         private IStudentsCoursesService studentsCoursesService;
-        private IStudentsService studentsService;
-        private ICoursesService coursesService;
 
-        public StudentsCoursesController(IStudentsCoursesService studentsCoursesService, IStudentsService studentsService, ICoursesService coursesService)
+        public StudentsCoursesController(IStudentsCoursesService studentsCoursesService)
         {
             this.studentsCoursesService = studentsCoursesService;
-            this.studentsService = studentsService;
-            this.coursesService = coursesService;
         }
 
         [Route("all")]
@@ -48,9 +44,9 @@
             {
                 foreach (AdminStudentCourseViewModel studentCourseViewModel in viewModels)
                 {
-                    int? studentId = this.studentsService.GetStudentId(studentCourseViewModel.StudentUsername);
-                    int? courseId = this.coursesService.GetCourseId(studentCourseViewModel.CourseName);
-                    if (!this.studentsCoursesService.AlreadyEnrolled(studentId, courseId))
+                    int? studentId = this.studentsCoursesService.GetStudentId(studentCourseViewModel.StudentUsername);
+                    int? courseId = this.studentsCoursesService.GetCourseId(studentCourseViewModel.CourseName);
+                    if (studentId != null && courseId != null && !this.studentsCoursesService.AlreadyEnrolled(studentId, courseId))
                     {
                         this.studentsCoursesService.Create(studentId.Value, courseId.Value);
                     }
@@ -101,7 +97,7 @@
                 return this.RedirectToAction("Index");
             }
 
-            string[] studentUsernames = this.studentsService
+            string[] studentUsernames = this.studentsCoursesService
                 .GetAllStudentUsernames()
                 .Where(u => u.ToLower().Contains(username.ToLower()))
                 .ToArray();
@@ -117,7 +113,7 @@
                 return this.RedirectToAction("Index");
             }
 
-            string[] allCoursesForStudents = this.coursesService
+            string[] allCoursesForStudents = this.studentsCoursesService
                 .GetAllCoursesForStudent(username)
                 .Where(c => c.ToLower().Contains(courseName.ToLower()))
                 .ToArray();

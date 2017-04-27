@@ -15,14 +15,10 @@
     public class OpenCoursesController : StudentController
     {
         private IStudentsCoursesService studentsCoursesService;
-        private ICoursesService coursesService;
-        private IStudentsService studentsService;
 
-        public OpenCoursesController(IStudentsCoursesService studentsCoursesService, ICoursesService coursesService, IStudentsService studentsService)
+        public OpenCoursesController(IStudentsCoursesService studentsCoursesService)
         {
             this.studentsCoursesService = studentsCoursesService;
-            this.coursesService = coursesService;
-            this.studentsService = studentsService;
         }
 
         
@@ -52,8 +48,8 @@
             {
                 foreach (OpenCourseViewModel courseVm in openCourseVms)
                 {
-                    int? courseId = this.coursesService.GetCourseId(courseVm.CourseName);
-                    int? studentId = this.studentsService.GetStudentId(HttpContext.User.Identity.Name);
+                    int? courseId = this.studentsCoursesService.GetCourseId(courseVm.CourseName);
+                    int? studentId = this.studentsCoursesService.GetStudentId(HttpContext.User.Identity.Name);
                     if (courseId == null)
                     {
                         this.ModelState.AddModelError("CourseName", ValidationConstants.ValidationErrorMessages.NoSuchCourseErrorMsg);
@@ -64,7 +60,10 @@
                         this.ModelState.AddModelError("StudentId", ValidationConstants.ValidationErrorMessages.NoSuchStudentErrorMsg);
                     }
 
-                    this.studentsCoursesService.Create(studentId.Value, courseId.Value);
+                    if (courseId != null && studentId != null)
+                    {
+                        this.studentsCoursesService.Create(studentId.Value, courseId.Value);
+                    }
                 }
             }
 
@@ -113,7 +112,7 @@
 
             string username = HttpContext.User.Identity.Name;
             var courses =
-                this.coursesService.GetAllOpenCourses(username)
+                this.studentsCoursesService.GetAllOpenCoursesForStudent(username)
                 .Where(c => c.ToLower().Contains(courseName.ToLower()))
                 .ToArray();
 

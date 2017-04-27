@@ -1,41 +1,54 @@
 ﻿namespace UniversityInformationSystem.Services
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Contracts;
     using Data.Contracts;
     using Models.EntityModels;
+    using Models.EntityModels.Users;
 
-    public class MessagesService : IMessagesService
+    public class MessagesService : Service, IMessagesService
     {
-        private IDbRepository<Message> messages;
-
-        public MessagesService(IDbRepository<Message> messages)
+        public MessagesService(IUisDataContext dbContext) 
+            : base(dbContext)
         {
-            this.messages = messages;
         }
 
-        public void Create(string senderId, string reveiverId, string messageText)
+        public void Create(string senderUsername, string reveiverUsername, string messageText)
         {
-            Message newMessage = new Message()
+            ApplicationUser senderAppUser = this.ApplicationUserRepository
+                .All()
+                .FirstOrDefault(appUser => appUser.UserName == senderUsername);
+            ApplicationUser receiverAppUser = this.ApplicationUserRepository
+               .All()
+               .FirstOrDefault(appUser => appUser.UserName == reveiverUsername);
+            if (senderAppUser != null && receiverAppUser != null)
             {
-                ReceiverId = reveiverId,
-                SenderId = senderId,
-                Text = messageText
-            };
+                Message newMessage = new Message()
+                {
+                    Receiver = receiverAppUser,
+                    Sender = senderAppUser,
+                    Text = messageText
+                };
 
-            this.messages.Add(newMessage);
-            this.messages.SaveChanges();
+                this.MessagesRepository.Add(newMessage);
+                this.SaveChanges();
+            }
         }
 
         public void Delete(int messageId)
         {
-            Message messageEntity = this.messages.GetById(messageId);
-            this.messages.Delete(messageEntity);
-            this.messages.SaveChanges();
+            Message messageEntity = this.MessagesRepository.GetById(messageId);
+            this.MessagesRepository.Delete(messageEntity);
+            this.SaveChanges();
+        }
+
+        public IEnumerable<string> GetAllUsernames(string current)
+        {
+            return this.ApplicationUserRepository
+                   .All()
+                   .Where(u => u.UserName != current)
+                   .Select(u => u.UserName);
         }
     }
 }

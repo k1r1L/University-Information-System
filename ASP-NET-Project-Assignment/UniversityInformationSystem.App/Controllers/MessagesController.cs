@@ -11,12 +11,10 @@
     public class MessagesController : Controller
     {
         private IMessagesService messagesService;
-        private IUsersService usersService;
 
-        public MessagesController(IMessagesService messagesService, IUsersService usersService)
+        public MessagesController(IMessagesService messagesService)
         {
             this.messagesService = messagesService;
-            this.usersService = usersService;
         }
 
         [Route("create")]
@@ -33,19 +31,25 @@
         {
             if (this.ModelState.IsValid)
             {
-                ApplicationUser receiverAppUser =
-                    this.usersService.GetUserByUsername(messageVm.ReceiverUsername);
                 string senderUsername = HttpContext.User.Identity.Name;
-                ApplicationUser senderAppUser =
-                  this.usersService.GetUserByUsername(senderUsername);
-
-                if (receiverAppUser != null && senderAppUser != null)
-                {
-                    this.messagesService.Create(senderAppUser.Id, receiverAppUser.Id, messageVm.Text);
-                }
+                this.messagesService.Create(senderUsername, messageVm.ReceiverUsername, messageVm.Text);
+                return this.RedirectToAction("SuccessfulCreate", new { receiverUsername = messageVm.ReceiverUsername});
             }
 
             return this.View();
+        }
+
+        [Route("success")]
+        [HttpGet]
+        public ActionResult SuccessfulCreate(string receiverUsername)
+        {
+            if (receiverUsername == null)
+            {
+                return this.RedirectToAction("Create");
+            }
+
+            CreateMessageSuccessViewModel vm = new CreateMessageSuccessViewModel() { ReceiverUsername = receiverUsername};
+            return this.View(vm);
         }
 
         [Route("usernames")]
@@ -57,7 +61,7 @@
             }
 
             string currentUsername = HttpContext.User.Identity.Name;
-            string[] allUsernames = this.usersService
+            string[] allUsernames = this.messagesService
                 .GetAllUsernames(currentUsername)
                 .Where(u => u.ToLower().Contains(username.ToLower()))
                 .ToArray();

@@ -8,18 +8,16 @@
     using Models.EntityModels;
     using Models.ViewModels.Admin;
 
-    public class CoursesService : ICoursesService
+    public class AdminCoursesService : Service, IAdminCoursesService
     {
-        private IDbRepository<Course> courses;
-
-        public CoursesService(IDbRepository<Course> courses)
+        public AdminCoursesService(IUisDataContext dbContext) 
+            : base(dbContext)
         {
-            this.courses = courses;
         }
 
         public IQueryable<AdminCourseViewModel> GetAll()
         {
-            IQueryable<Course> courseEntities = this.courses.All();
+            IQueryable<Course> courseEntities = this.CoursesRepository.All();
             IEnumerable<AdminCourseViewModel> courseVms = Mapper.Map<IEnumerable<AdminCourseViewModel>>(courseEntities);
 
             return courseVms.AsQueryable();
@@ -34,38 +32,38 @@
                 Credits = courseViewModel.Credits,
                 IsOpen = courseViewModel.IsOpen == "Yes"
             };
-            this.courses.Add(courseEntity);
-            this.courses.SaveChanges();
+            this.CoursesRepository.Add(courseEntity);
+            this.SaveChanges();
+
             return courseEntity.Id;
         }
 
         public void Update(AdminCourseViewModel courseViewModel)
         {
-            Course entity = this.courses.GetById(courseViewModel.Id);
+            Course entity = this.CoursesRepository.GetById(courseViewModel.Id);
             entity.Name = courseViewModel.Name;
             entity.Description = courseViewModel.Description;
             entity.IsOpen = courseViewModel.IsOpen == "Yes";
-            this.courses.Update(entity);
-            this.courses.SaveChanges();
+            this.SaveChanges();
         }
 
         public void Delete(int courseId)
         {
-            Course courseEntity = this.courses.GetById(courseId);
-            this.courses.Delete(courseEntity);
-            this.courses.SaveChanges();
+            Course courseEntity = this.CoursesRepository.GetById(courseId);
+            this.CoursesRepository.Delete(courseEntity);
+            this.SaveChanges();
         }
 
         public void AddTeacher(int teacherId, int courseId)
         {
-            Course courseEntity = this.courses.GetById(courseId);
+            Course courseEntity = this.CoursesRepository.GetById(courseId);
             courseEntity.TeacherId = teacherId;
-            this.courses.SaveChanges();
+            this.SaveChanges();
         }
 
         public int? GetCourseId(string courseName)
         {
-            Course courseEntity = this.courses
+            Course courseEntity = this.CoursesRepository
                 .All()
                 .SingleOrDefault(c => c.Name == courseName);
 
@@ -74,7 +72,7 @@
 
         public int? GetTeacherIdByCourseName(string courseName)
         {
-            return this.courses
+            return this.CoursesRepository
                 .All()
                 .SingleOrDefault(c => c.Name == courseName)
                 ?.TeacherId;
@@ -82,7 +80,7 @@
 
         public bool HasTeacher(int courseId)
         {
-            Course courseEntity = this.courses
+            Course courseEntity = this.CoursesRepository
                 .GetById(courseId);
 
             return courseEntity.Teacher != null;
@@ -90,7 +88,7 @@
 
         public IEnumerable<string> GetAllOpenCourses(string studentUsername)
         {
-            var openCoursesNames = this.courses
+            var openCoursesNames = this.CoursesRepository
                 .All()
                 .Where(c => c.IsOpen && c.Teacher != null && c.EnrolledStudents.All(sc => sc.Student.IdentityUser.UserName != studentUsername))
                 .Select(c => c.Name);
@@ -100,10 +98,36 @@
 
         public IEnumerable<string> GetAllCoursesForStudent(string studentUsername)
         {
-            return this.courses
+            return this.CoursesRepository
                 .All()
                 .Where(c => c.EnrolledStudents.All(sc => sc.Student.IdentityUser.UserName != studentUsername))
                 .Select(c => c.Name);
+        }
+
+        public IQueryable<CourseTeacherViewModel> GetAllTeachersForCourses()
+        {
+            return this.TeacherRepository.All().Select(t => new CourseTeacherViewModel()
+            {
+                Id = t.Id,
+                UserName = t.IdentityUser.UserName
+            }).OrderBy(t => t.UserName);
+        }
+
+
+        public CourseTeacherViewModel GetFirstTeacher()
+        {
+            return this.TeacherRepository.All().Select(t => new CourseTeacherViewModel()
+            {
+                Id = t.Id,
+                UserName = t.IdentityUser.UserName
+            }).First();
+        }
+
+        public bool TeacherExists(string teacherUsername)
+        {
+            return this.TeacherRepository
+                .All()
+                .Any(t => t.IdentityUser.UserName == teacherUsername);
         }
     }
 }

@@ -23,15 +23,13 @@
     public class UsersController : AdminController
     {
         private ApplicationUserManager _userManager;
-        private IRegisterService registerService;
         private IUsersService usersService;
 
         // TODO: Inject userManager
-        public UsersController(IRegisterService registerService, IUsersService usersService ,UisDataContext dbContext)
+        public UsersController(IUsersService usersService , UisDataContext dbContext)
         {
             this.UserManager = new ApplicationUserManager(
                 new UserStore<ApplicationUser>(dbContext));
-            this.registerService = registerService;
             this.usersService = usersService;
         }
 
@@ -83,7 +81,7 @@
                             throw new ArgumentException("Invalid Role!");
                     }
 
-                    this.registerService.Register(model.UserType, user.Id);
+                    this.usersService.Register(model.UserType, user.Id);
 
                     var successfulRegisterVm = Mapper.Map<RegisterSuccessViewModel>(user);
                     successfulRegisterVm.UserType = model.UserType;

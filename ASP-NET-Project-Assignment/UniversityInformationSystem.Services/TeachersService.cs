@@ -1,46 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UniversityInformationSystem.Services
+﻿namespace UniversityInformationSystem.Services
 {
+    using System.Linq;
     using AutoMapper;
     using Contracts;
-    using Data;
     using Data.Contracts;
-    using Models.EntityModels;
     using Models.EntityModels.Users;
     using Models.ViewModels.Admin;
     using Models.ViewModels.Teacher;
 
-    public class TeachersService : ITeachersService
+    public class TeachersService : Service, ITeachersService
     {
-        private IDbRepository<Teacher> teachers;
-
-        public TeachersService(IDbRepository<Teacher> teachers)
+        public TeachersService(IUisDataContext dbContext)
+            : base(dbContext)
         {
-            this.teachers = teachers;
         }
 
         public Teacher GetTeacherByUsername(string username)
         {
-            return this.teachers
+            return this.TeacherRepository
                 .All()
                 .Single(t => t.IdentityUser.UserName == username);
         }
 
         public bool TeacherExists(string teacherUsername)
         {
-            return this.teachers
+            return this.TeacherRepository
                 .All()
                 .Any(t => t.IdentityUser.UserName == teacherUsername);
         }
 
         public IQueryable<CourseTeacherViewModel> GetAllTeachersForCourses()
         {
-            return this.teachers.All().Select(t => new CourseTeacherViewModel()
+            return this.TeacherRepository.All().Select(t => new CourseTeacherViewModel()
             {
                 Id = t.Id,
                 UserName = t.IdentityUser.UserName
@@ -49,11 +40,13 @@ namespace UniversityInformationSystem.Services
 
         public CourseTeacherViewModel GetFirst()
         {
-            return this.teachers.All().Select(t => new CourseTeacherViewModel()
-            {
-                Id = t.Id,
-                UserName = t.IdentityUser.UserName
-            }).First();
+            return this.TeacherRepository
+                .All()
+                .Select(t => new CourseTeacherViewModel()
+                {
+                    Id = t.Id,
+                    UserName = t.IdentityUser.UserName
+                }).First();
         }
 
         public TeacherProfileViewModel GetTeacherProfileViewModel(string username)
@@ -65,7 +58,7 @@ namespace UniversityInformationSystem.Services
 
         public int? GetTeacherId(string teacherUsername)
         {
-            Teacher teacherEntity = this.teachers
+            Teacher teacherEntity = this.TeacherRepository
                 .All()
                 .SingleOrDefault(t => t.IdentityUser.UserName == teacherUsername);
 
