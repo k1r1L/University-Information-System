@@ -2,10 +2,12 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using AutoMapper;
     using Contracts;
     using Data.Contracts;
     using Models.EntityModels;
     using Models.EntityModels.Users;
+    using Models.ViewModels.Messages;
 
     public class MessagesService : Service, IMessagesService
     {
@@ -49,6 +51,37 @@
                    .All()
                    .Where(u => u.UserName != current)
                    .Select(u => u.UserName);
+        }
+
+        public IEnumerable<InboxMessageViewModel> InboxMessages(string username)
+        {
+            IEnumerable<Message> allMessagesForUser = this.MessagesRepository
+                .All()
+                .Where(m => m.Receiver.UserName == username);
+            IEnumerable<InboxMessageViewModel> vms = Mapper.Map<IEnumerable<InboxMessageViewModel>>(allMessagesForUser);
+
+            return vms;
+        }
+
+        public InboxMessageViewModel GetInboxMessageById(int id)
+        {
+            Message messageEntity = this.MessagesRepository.GetById(id);
+
+            return Mapper.Map<InboxMessageViewModel>(messageEntity);
+        }
+
+        public bool MessageExists(int id)
+        {
+            return this.MessagesRepository
+                .All()
+                .Any(m => m.Id == id);
+        }
+
+        public bool UnauthorizedDelete(int id, string receiver)
+        {
+            Message messageEntity = this.MessagesRepository.GetById(id);
+
+            return messageEntity.Receiver.UserName != receiver;
         }
     }
 }

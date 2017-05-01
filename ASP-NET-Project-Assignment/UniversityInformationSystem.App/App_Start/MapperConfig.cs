@@ -7,6 +7,7 @@
     using Models.Enums;
     using Models.ViewModels.Account;
     using Models.ViewModels.Admin;
+    using Models.ViewModels.Messages;
     using Models.ViewModels.Student;
     using Models.ViewModels.Teacher;
 
@@ -98,6 +99,9 @@
                  .ForMember(vm => vm.CourseName, configExpression => configExpression.MapFrom(e => e.Course.Name))
                  .ForMember(vm => vm.TeacherUsername,
                      configExpression => configExpression.MapFrom(e => e.Course.Teacher.IdentityUser.UserName));
+                action.CreateMap<Message, InboxMessageViewModel>()
+                    .ForMember(vm => vm.SenderUsername,
+                        configExpression => configExpression.MapFrom(e => e.Sender.UserName));
             });
         }
     }

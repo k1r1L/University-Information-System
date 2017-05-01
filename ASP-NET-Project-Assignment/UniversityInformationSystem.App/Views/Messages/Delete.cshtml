@@ -1,0 +1,41 @@
+﻿@model UniversityInformationSystem.Models.ViewModels.Messages.InboxMessageViewModel
+
+@{
+    ViewBag.Title = "Delete Message";
+}
+
+<div class="col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
+    <h3>Are you sure you want to delete this message?</h3>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.SenderUsername)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SenderUsername)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Text)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Text)
+            </dd>
+
+        </dl>
+    </div>
+</div>
+<div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4">
+    @using (Html.BeginForm("DeleteConfirmed", "Messages", FormMethod.Post, new { id = Model.Id }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-warning" /> |
+            @Html.ActionLink("Back to Inbox", "Inbox")
+        </div>
+    }
+</div>
+

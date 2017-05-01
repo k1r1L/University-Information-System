@@ -1,15 +1,20 @@
 ﻿namespace UniversityInformationSystem.App.Controllers
 {
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.InteropServices.ComTypes;
     using System.Web.Mvc;
+    using Exceptions;
     using Models.EntityModels.Users;
     using Models.ViewModels.Messages;
+    using PagedList;
     using Services.Contracts;
 
     [RoutePrefix("messages")]
     [Authorize]
     public class MessagesController : Controller
     {
+        private const int pageSize = 5;
         private IMessagesService messagesService;
 
         public MessagesController(IMessagesService messagesService)
@@ -50,6 +55,50 @@
 
             CreateMessageSuccessViewModel vm = new CreateMessageSuccessViewModel() { ReceiverUsername = receiverUsername};
             return this.View(vm);
+        }
+
+        [Route("inbox")]
+        [HttpGet]
+        public ActionResult Inbox(int? page)
+        {
+            string username = HttpContext.User.Identity.Name;
+            IEnumerable<InboxMessageViewModel> inboxMessages = this.messagesService.InboxMessages(username);
+
+            int pageNumber = page ?? 1;
+            return this.View(inboxMessages.ToPagedList(pageNumber, pageSize));
+        }
+
+        [Route("delete/{id}")]
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            if (!this.messagesService.MessageExists(id))
+            {
+                throw new NonExistingMessageException();
+            }
+
+            if (this.messagesService.UnauthorizedDelete(id, HttpContext.User.Identity.Name))
+            {
+                throw new UnauthorizedDeleteException();
+            }
+
+            InboxMessageViewModel messageVm = this.messagesService.GetInboxMessageById(id);
+
+            return this.View(messageVm);
+        }
+
+        [Route("delete/{id}")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            if (this.messagesService.MessageExists(id))
+            {
+                this.messagesService.Delete(id);
+                return RedirectToAction("Inbox");
+            }
+
+            throw new NonExistingMessageException();
         }
 
         [Route("usernames")]

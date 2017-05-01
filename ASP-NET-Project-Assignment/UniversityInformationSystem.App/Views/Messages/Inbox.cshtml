@@ -1,0 +1,46 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<UniversityInformationSystem.Models.ViewModels.Messages.InboxMessageViewModel>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Inbox";
+}
+
+<h2>INBOX MESSAGES</h2>
+
+<p>
+    @Html.ActionLink("Send a Message", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Sender:
+        </th>
+        <th>
+            Text:
+        </th>
+        <th>
+            Delete:
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SenderUsername)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Inbox",
+    new { page }))
