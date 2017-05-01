@@ -18,10 +18,12 @@
 
         IQueryable<UserViewModel> GetAll();
 
+        bool UserExists(string userId);
+
         void Update(UserViewModel userVm, UserManager<ApplicationUser> userManager);
 
         // TODO: Think about that
-        //void Delete(string userId);
+        void Delete(string userId);
 
     }
 }

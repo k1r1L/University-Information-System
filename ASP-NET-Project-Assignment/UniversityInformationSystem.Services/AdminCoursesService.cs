@@ -120,7 +120,7 @@
             {
                 Id = t.Id,
                 UserName = t.IdentityUser.UserName
-            }).First();
+            }).FirstOrDefault();
         }
 
         public bool TeacherExists(string teacherUsername)

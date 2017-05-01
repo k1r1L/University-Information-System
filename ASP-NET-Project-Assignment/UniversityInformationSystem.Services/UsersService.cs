@@ -1,12 +1,14 @@
 ﻿namespace UniversityInformationSystem.Services
 {
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Linq;
     using AutoMapper;
     using Contracts;
     using Data.Contracts;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
+    using Models.EntityModels;
     using Models.EntityModels.Users;
     using Models.Enums;
     using Models.ViewModels.Admin;
@@ -57,10 +59,19 @@
 
         public IQueryable<UserViewModel> GetAll()
         {
-            IEnumerable<ApplicationUser> allUsersInDb = this.ApplicationUserRepository.All();
+            IEnumerable<ApplicationUser> allUsersInDb = this.ApplicationUserRepository
+                .All()
+                .Where(u => u.UserName != "kirilvk1");
             IEnumerable<UserViewModel> allUserVms = Mapper.Map<IEnumerable<UserViewModel>>(allUsersInDb);
 
             return allUserVms.AsQueryable();
+        }
+
+        public bool UserExists(string userId)
+        {
+            return this.ApplicationUserRepository
+                .All()
+                .Any(u => u.Id == userId);
         }
 
         public void Update(UserViewModel userVm, UserManager<ApplicationUser> userManager)
@@ -71,6 +82,69 @@
             userStore.SetPasswordHashAsync(user, newPasswordHashed);
             user.FirstName = userVm.FirstName;
             user.LastName = userVm.LastName;
+            this.SaveChanges();
+        }
+
+        public void Delete(string userId)
+        {
+            ApplicationUser appUser = this.ApplicationUserRepository.GetById(userId);
+            Teacher teacherEntity = this.TeacherRepository.All().FirstOrDefault(t => t.IdentityUser.Id == userId);
+            Student studentEntity = this.StudentRepository.All().FirstOrDefault(s => s.IdentityUser.Id == userId);
+
+            if (teacherEntity != null)
+            {
+                DeleteTeacher(teacherEntity);
+            }
+
+            if (studentEntity != null)
+            {
+                DeleteStudent(studentEntity);
+            }
+
+            DeleteMessages(userId);
+            this.ApplicationUserRepository.Delete(appUser);
+            this.SaveChanges();
+        }
+
+        private void DeleteMessages(string userId)
+        {
+            List<Message> messages =
+                            this.MessagesRepository
+                            .All()
+                            .Where(m => m.ReceiverId == userId || m.SenderId == userId)
+                            .ToList();
+            foreach (Message message in messages)
+            {
+                this.Context.Entry(message).State = EntityState.Deleted;
+            }
+
+            this.SaveChanges();
+        }
+
+        private void DeleteTeacher(Teacher teacherEntity)
+        {
+            List<Course> courses = this.CoursesRepository
+                                .All()
+                                .Where(c => c.TeacherId == teacherEntity.Id)
+                                .ToList();
+            foreach (Course course in courses)
+            {
+                course.Teacher = null;
+            }
+
+            this.TeacherRepository.Delete(teacherEntity);
+            this.SaveChanges();
+        }
+
+        private void DeleteStudent(Student studentEntity)
+        {
+            List<StudentCourse> enrolledCourses = studentEntity.EnrolledCourses.ToList();
+            foreach (StudentCourse enrolledCourse in enrolledCourses)
+            {
+                this.Context.Entry(enrolledCourse).State = EntityState.Deleted;
+            }
+
+            this.StudentRepository.Delete(studentEntity);
             this.SaveChanges();
         }
     }

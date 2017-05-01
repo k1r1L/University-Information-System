@@ -109,6 +109,17 @@
             return this.Json(userVms.ToDataSourceResult(request));
         }
 
+        [Route("Users_Destroy")]
+        public ActionResult Users_Destroy([DataSourceRequest]DataSourceRequest request, UserViewModel userVm)
+        {
+            if (this.usersService.UserExists(userVm.Id))
+            {
+                this.usersService.Delete(userVm.Id);
+            }
+
+            return this.Json(new []{ userVm }.ToDataSourceResult(request));
+        }
+
         [Route("Users_Update")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Users_Update([DataSourceRequest]DataSourceRequest request, UserViewModel userVm)

@@ -1,6 +1,6 @@
 ﻿@using UniversityInformationSystem.Models.ViewModels.Admin
 @(Html.Kendo().Grid<UserViewModel>()
-    .Name("grid")
+    .Name("usersgrid")
     .Columns(columns =>
     {
         columns.Bound(p => p.FirstName);
@@ -9,6 +9,7 @@
         columns.Command(command =>
         {
             command.Edit();
+            command.Destroy();
         });
     })
     .Editable(editable => editable.Mode(GridEditMode.PopUp))
@@ -27,6 +28,7 @@
         .Events(e => e.Error("error_handler"))
         .Model(model => model.Id(p => p.Id))
         .Read(read => read.Action("Users_Read", "Users"))
+        .Destroy(destroy => destroy.Action("Users_Destroy", "Users"))
         .Update(update => update.Action("Users_Update", "Users"))
     )
       )
