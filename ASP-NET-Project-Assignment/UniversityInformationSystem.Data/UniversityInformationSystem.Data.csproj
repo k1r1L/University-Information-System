@@ -102,6 +102,12 @@
       <DependentUpon>201704251137143_AddedMessages.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Mocks\DbSets\MockedCoursesDbSet.cs" />
+    <Compile Include="Mocks\DbSets\MockedMessagesDbSet.cs" />
+    <Compile Include="Mocks\DbSets\MockedStudentsDbSet.cs" />
+    <Compile Include="Mocks\DbSets\MockedTeachersDbSet.cs" />
+    <Compile Include="Mocks\MockedDbSet.cs" />
+    <Compile Include="Mocks\MockedUisDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DbRepository.cs" />
     <Compile Include="UisDataContext.cs" />
