@@ -23,11 +23,11 @@
         public IDbSet<Course> Courses { get; set; }
         public IDbSet<StudentCourse> StudentsCourses { get; set; }
         public IDbSet<Message> Messages { get; set; }
-
-        public DbSet<TEntity> Set<TEntity>() where TEntity : class
+        public DbSet<T> Set<T>() where T : class
         {
-            return null;
+            return new MockedDbSet<T>();
         }
+
 
         public DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class
         {

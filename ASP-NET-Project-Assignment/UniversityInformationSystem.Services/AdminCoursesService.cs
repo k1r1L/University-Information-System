@@ -5,7 +5,9 @@
     using AutoMapper;
     using Contracts;
     using Data.Contracts;
+    using Data.Mocks.Repositories;
     using Models.EntityModels;
+    using Models.EntityModels.Users;
     using Models.ViewModels.Admin;
 
     public class AdminCoursesService : Service, IAdminCoursesService
@@ -14,6 +16,19 @@
             : base(dbContext)
         {
         }
+
+        // Constructor for unit testing
+        public AdminCoursesService(IUisDataContext dbContext
+            , MockedCourseRepository mockedCourseRepository, MockedTeachersRepository mockedTeachersRepository)
+
+            :base(dbContext)
+        {
+            this.CoursesRepository = mockedCourseRepository;
+            this.TeacherRepository = mockedTeachersRepository;
+            this.SeedCourses();
+            this.SeedTeachers();
+        }
+
 
         public IQueryable<AdminCourseViewModel> GetAll()
         {
@@ -57,6 +72,8 @@
         public void AddTeacher(int teacherId, int courseId)
         {
             Course courseEntity = this.CoursesRepository.GetById(courseId);
+            Teacher teacherEntity = this.TeacherRepository.GetById(teacherId);
+            courseEntity.Teacher = teacherEntity;
             courseEntity.TeacherId = teacherId;
             this.SaveChanges();
         }

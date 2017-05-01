@@ -11,6 +11,7 @@ namespace UniversityInformationSystem.App
     using System.Web.Configuration;
     using Data;
     using Data.Contracts;
+    using Data.Mocks;
     using Data.Repositories;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject;

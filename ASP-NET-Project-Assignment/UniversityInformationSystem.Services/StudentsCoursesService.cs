@@ -26,6 +26,28 @@
             return allVms.AsQueryable();
         }
 
+        public void Create(int studentId, int courseId)
+        {
+            // By default the student has an F grade (only teachers can change grades)
+            StudentCourse studentCourse = new StudentCourse()
+            {
+                CourseId = courseId,
+                StudentId = studentId,
+                Grade = Grade.F
+            };
+
+            this.StudentsCoursesRepository.Add(studentCourse);
+            this.SaveChanges();
+        }
+
+        public void Delete(int studentId, int courseId)
+        {
+            StudentCourse studentCourse = this.StudentsCoursesRepository
+                .All()
+                .Single(sc => sc.StudentId == studentId && sc.CourseId == courseId);
+            this.StudentsCoursesRepository.Delete(studentCourse);
+            this.SaveChanges();
+        }
         public IQueryable<MandatoryCourseViewModel> GetAllMandatoryCourses(string studentUsername)
         {
             IQueryable<StudentCourse> mandatoryCourses = this.StudentsCoursesRepository
@@ -69,29 +91,6 @@
                .Select(c => c.Name);
 
             return openCoursesNames;
-        }
-
-        public void Create(int studentId, int courseId)
-        {
-            // By default the student has an F grade (only teachers can change grades)
-            StudentCourse studentCourse = new StudentCourse()
-            {
-                CourseId = courseId,
-                StudentId = studentId,
-                Grade = Grade.F
-            };
-
-            this.StudentsCoursesRepository.Add(studentCourse);
-            this.SaveChanges();
-        }
-
-        public void Delete(int studentId, int courseId)
-        {
-            StudentCourse studentCourse = this.StudentsCoursesRepository
-                .All()
-                .Single(sc => sc.StudentId == studentId && sc.CourseId == courseId);
-            this.StudentsCoursesRepository.Delete(studentCourse);
-            this.SaveChanges();
         }
 
         public bool AlreadyEnrolled(int? studentId, int? courseId)

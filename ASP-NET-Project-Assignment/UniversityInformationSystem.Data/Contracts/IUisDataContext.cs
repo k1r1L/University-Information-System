@@ -18,11 +18,11 @@
 
         IDbSet<Message> Messages { get; set; }
 
-        DbSet<TEntity> Set<TEntity>()
-        where TEntity : class;
+        DbSet<T> Set<T>()
+        where T : class;
 
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity)
-            where TEntity : class;
+         where TEntity : class;
 
         int SaveChanges();
 

@@ -41,16 +41,20 @@
             [Bind(Prefix = "models")]IEnumerable<AdminCourseViewModel> courses)
         {
             List<AdminCourseViewModel> results = new List<AdminCourseViewModel>();
-            if (courses != null && ModelState.IsValid)
+            if (courses != null)
             {
                 foreach (AdminCourseViewModel course in courses)
                 {
-                    int teacherId = course.Teacher.Id;
                     int courseId = this.coursesService.Create(course);
 
-                    if (this.coursesService.TeacherExists(course.Teacher.UserName))
+                    if (course.Teacher != null)
                     {
-                        this.coursesService.AddTeacher(teacherId, courseId);
+                        int teacherId = course.Teacher.Id;
+                        if (this.coursesService.TeacherExists(course.Teacher.UserName))
+                        {
+                            this.coursesService.AddTeacher(teacherId, courseId);
+                        }
+
                     }
 
                     results.Add(course);

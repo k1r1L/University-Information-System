@@ -1,13 +1,7 @@
 ﻿namespace UniversityInformationSystem.Data.Repositories
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Data.Entity;
-    using System.Data.Entity.Validation;
-    using System.Diagnostics;
+    using System.Linq;
     using Contracts;
 
     public class DbRepository<T> : IDbRepository<T>
@@ -18,7 +12,7 @@
             this.DbSet = dbContext.Set<T>();
         }
 
-        protected IDbSet<T> DbSet { get; set; }
+        protected virtual IDbSet<T> DbSet { get; set; }
 
         public virtual IQueryable<T> All()
         {

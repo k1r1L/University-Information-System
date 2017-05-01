@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityInformationSystem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityInformationSystem.Models", "UniversityInformationSystem.Models\UniversityInformationSystem.Models.csproj", "{9DC41A1B-7336-461F-BEED-BC29EEBD2C34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityInformationSystem.Tests", "UniversityInformationSystem.Tests\UniversityInformationSystem.Tests.csproj", "{336D0C4C-27AE-48F0-99C4-332FFE686431}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{9DC41A1B-7336-461F-BEED-BC29EEBD2C34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DC41A1B-7336-461F-BEED-BC29EEBD2C34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DC41A1B-7336-461F-BEED-BC29EEBD2C34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{336D0C4C-27AE-48F0-99C4-332FFE686431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{336D0C4C-27AE-48F0-99C4-332FFE686431}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{336D0C4C-27AE-48F0-99C4-332FFE686431}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{336D0C4C-27AE-48F0-99C4-332FFE686431}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
