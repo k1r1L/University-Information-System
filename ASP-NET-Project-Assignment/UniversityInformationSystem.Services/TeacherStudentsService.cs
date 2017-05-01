@@ -5,6 +5,7 @@
     using AutoMapper;
     using Contracts;
     using Data.Contracts;
+    using Data.Mocks.Repositories;
     using Models.EntityModels;
     using Models.ViewModels.Teacher;
 
@@ -15,13 +16,20 @@
         {
         }
 
+        public TeacherStudentsService(IUisDataContext dbContext, MockedStudentsCoursesRepository mockedStudentsCoursesRepository)
+            : base(dbContext)
+        {
+            this.StudentsCoursesRepository = mockedStudentsCoursesRepository;
+            this.SeedStudentsCourses();
+        }
+
         public IQueryable<TeacherStudentCourseViewModel> GetAll(string teacherName)
         {
-            IQueryable<StudentCourse> teacherStudents = this.StudentsCoursesRepository
+            IQueryable<StudentCourse> students = this.StudentsCoursesRepository
                 .All()
                 .Where(sc => sc.Course.Teacher.IdentityUser.UserName == teacherName);
 
-            var vms = Mapper.Map<IEnumerable<TeacherStudentCourseViewModel>>(teacherStudents);
+            var vms = Mapper.Map<IEnumerable<TeacherStudentCourseViewModel>>(students);
             return vms.AsQueryable();
         }
 

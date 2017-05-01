@@ -11,12 +11,6 @@
 
         bool TeacherExists(string teacherUsername);
 
-        int? GetTeacherId(string teacherUsername);
-
-        IQueryable<CourseTeacherViewModel> GetAllTeachersForCourses();
-
-        CourseTeacherViewModel GetFirst();
-
         TeacherProfileViewModel GetTeacherProfileViewModel(string username);
 
     }

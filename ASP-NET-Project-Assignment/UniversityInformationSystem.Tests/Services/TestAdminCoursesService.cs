@@ -180,18 +180,6 @@
             Assert.IsTrue(hasTeacher);
         }
 
-        [TestMethod]
-        public void Test_HasTeacher_Should_Return_False()
-        {
-            // Arrange
-            const int courseId = 3;
-
-            // Act
-            bool hasTeacher = this.coursesService.HasTeacher(courseId);
-
-            // Assert
-            Assert.IsFalse(hasTeacher);
-        }
 
         [TestMethod]
         public void Test_GetAllOpenCourses()

@@ -184,10 +184,10 @@
         }
 
         [TestMethod]
-        public void Test_GetAllOpenCoursesForStudent_Should_Return_1()
+        public void Test_GetAllOpenCoursesForStudent_Should_Return_2()
         {
             // Arrange
-            const int openCoursesCount = 1;
+            const int openCoursesCount = 2;
             const string studentUsername = "jicata";
 
             // Act

@@ -69,5 +69,13 @@
             }
         }
 
+        protected void SeedStudentsCourses()
+        {
+            foreach (StudentCourse studentCourse in dbContext.StudentsCourses)
+            {
+                this.StudentsCoursesRepository.Add(studentCourse);
+            }
+        }
+
     }
 }

@@ -1,13 +1,11 @@
 ﻿namespace UniversityInformationSystem.Services
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using AutoMapper;
     using Contracts;
     using Data.Contracts;
+    using Data.Mocks.Repositories;
     using Models.EntityModels;
     using Models.ViewModels.Teacher;
 
@@ -16,6 +14,15 @@
         public TeacherCoursesService(IUisDataContext dbContext)
             : base(dbContext)
         {
+        }
+
+        // Constructor for unit testing
+        public TeacherCoursesService(IUisDataContext dbContext, MockedCourseRepository mockedCourseRepository)
+            : base(dbContext)
+        {
+            this.CoursesRepository = mockedCourseRepository;
+            this.SeedCourses();
+            this.SeedTeachers();
         }
 
         public IQueryable<TeacherCourseViewModel> GetAll(string teacherUsername)

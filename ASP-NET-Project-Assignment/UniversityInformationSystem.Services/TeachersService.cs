@@ -4,6 +4,7 @@
     using AutoMapper;
     using Contracts;
     using Data.Contracts;
+    using Data.Mocks.Repositories;
     using Models.EntityModels.Users;
     using Models.ViewModels.Admin;
     using Models.ViewModels.Teacher;
@@ -13,6 +14,13 @@
         public TeachersService(IUisDataContext dbContext)
             : base(dbContext)
         {
+        }
+
+        public TeachersService(IUisDataContext dbContext, MockedTeachersRepository mockedTeachersRepository)
+            : base(dbContext)
+        {
+            this.TeacherRepository = mockedTeachersRepository;
+            this.SeedTeachers();
         }
 
         public Teacher GetTeacherByUsername(string username)
@@ -29,40 +37,11 @@
                 .Any(t => t.IdentityUser.UserName == teacherUsername);
         }
 
-        public IQueryable<CourseTeacherViewModel> GetAllTeachersForCourses()
-        {
-            return this.TeacherRepository.All().Select(t => new CourseTeacherViewModel()
-            {
-                Id = t.Id,
-                UserName = t.IdentityUser.UserName
-            }).OrderBy(t => t.UserName);
-        }
-
-        public CourseTeacherViewModel GetFirst()
-        {
-            return this.TeacherRepository
-                .All()
-                .Select(t => new CourseTeacherViewModel()
-                {
-                    Id = t.Id,
-                    UserName = t.IdentityUser.UserName
-                }).First();
-        }
-
         public TeacherProfileViewModel GetTeacherProfileViewModel(string username)
         {
             Teacher teacherEntity = this.GetTeacherByUsername(username);
 
             return Mapper.Map<TeacherProfileViewModel>(teacherEntity);
-        }
-
-        public int? GetTeacherId(string teacherUsername)
-        {
-            Teacher teacherEntity = this.TeacherRepository
-                .All()
-                .SingleOrDefault(t => t.IdentityUser.UserName == teacherUsername);
-
-            return teacherEntity?.Id;
         }
     }
 }
