@@ -1,10 +1,6 @@
 ﻿namespace UniversityInformationSystem.Services
 {
-    using System.Runtime.CompilerServices;
-    using Contracts;
     using Data.Contracts;
-    using Data.Mocks;
-    using Data.Mocks;
     using Data.Repositories;
     using Models.EntityModels;
     using Models.EntityModels.Users;
@@ -60,7 +56,18 @@
             foreach (Teacher teacher in dbContext.Teachers)
             {
                 this.TeacherRepository.Add(teacher);
+                this.ApplicationUserRepository.Add(teacher.IdentityUser);
             }
         }
+
+        protected void SeedStudents()
+        {
+            foreach (Student student in dbContext.Students)
+            {
+                this.StudentRepository.Add(student);
+                this.ApplicationUserRepository.Add(student.IdentityUser);
+            }
+        }
+
     }
 }

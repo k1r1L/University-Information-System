@@ -106,9 +106,14 @@
     <Compile Include="Mocks\DbSets\MockedMessagesDbSet.cs" />
     <Compile Include="Mocks\DbSets\MockedStudentsDbSet.cs" />
     <Compile Include="Mocks\DbSets\MockedTeachersDbSet.cs" />
+    <Compile Include="Mocks\DbSets\MockedUsersDbSet.cs" />
     <Compile Include="Mocks\MockedDbSet.cs" />
     <Compile Include="Mocks\MockedUisDbContext.cs" />
+    <Compile Include="Mocks\Repositories\MockedMessagesRepository.cs" />
+    <Compile Include="Mocks\Repositories\MockedStudentsCoursesRepository.cs" />
+    <Compile Include="Mocks\Repositories\MockedStudentsRepository.cs" />
     <Compile Include="Mocks\Repositories\MockedTeachersRepository.cs" />
+    <Compile Include="Mocks\Repositories\MockedUsersRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Mocks\Repositories\MockedCourseRepository.cs" />
     <Compile Include="Repositories\DbRepository.cs" />

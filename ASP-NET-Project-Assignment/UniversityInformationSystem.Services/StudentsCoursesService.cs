@@ -5,6 +5,7 @@
     using AutoMapper;
     using Contracts;
     using Data.Contracts;
+    using Data.Mocks.Repositories;
     using Models.EntityModels;
     using Models.EntityModels.Users;
     using Models.Enums;
@@ -18,6 +19,20 @@
         {
         }
 
+        // Constructor for unit testing
+        public StudentsCoursesService(IUisDataContext dbContext, 
+            MockedStudentsCoursesRepository mockedStudentsCoursesRepository, 
+            MockedCourseRepository mockedCourseRepository,
+            MockedStudentsRepository mockedStudentsRepository)
+            : base(dbContext)
+        {
+            this.StudentsCoursesRepository = mockedStudentsCoursesRepository;
+            this.StudentRepository = mockedStudentsRepository;
+            this.CoursesRepository = mockedCourseRepository;
+            this.SeedCourses();
+            this.SeedStudents();
+        }
+
         public IQueryable<AdminStudentCourseViewModel> GetAll()
         {
             IEnumerable<StudentCourse> allEntities =  this.StudentsCoursesRepository.All();
@@ -29,10 +44,14 @@
         public void Create(int studentId, int courseId)
         {
             // By default the student has an F grade (only teachers can change grades)
+            Student studentEntity = this.StudentRepository.GetById(studentId);
+            Course courseEntity = this.CoursesRepository.GetById(courseId);
             StudentCourse studentCourse = new StudentCourse()
             {
-                CourseId = courseId,
+                Course = courseEntity,
+                Student = studentEntity,
                 StudentId = studentId,
+                CourseId = courseId,
                 Grade = Grade.F
             };
 
@@ -48,6 +67,7 @@
             this.StudentsCoursesRepository.Delete(studentCourse);
             this.SaveChanges();
         }
+
         public IQueryable<MandatoryCourseViewModel> GetAllMandatoryCourses(string studentUsername)
         {
             IQueryable<StudentCourse> mandatoryCourses = this.StudentsCoursesRepository

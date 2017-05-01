@@ -4,7 +4,6 @@
     using App;
     using Data.Contracts;
     using Data.Mocks;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Models.EntityModels;
     using Models.EntityModels.Users;
 
@@ -15,11 +14,11 @@
         protected BaseTest()
         {
             this.dbContext = new MockedUisDbContext();
-            this.AddData();
+            this.SeedData();
             MapperConfig.ConfigureAutomapper();
         }
 
-        protected void AddData()
+        protected void SeedData()
         {
             // Seed courses
             this.dbContext.Courses.Add(new Course()
@@ -75,7 +74,11 @@
                     "(таблици и релационни връзки) и работата езика SQL (извличане на данни, селекция, проекция, съединения, агрегация," +
                     " групиране, промяна, изтриване и вмъкване).",
                 Credits = 9,
-                IsOpen = true
+                IsOpen = true,
+                Teacher = new Teacher()
+                {
+                    IdenityUserId = "sadasd3243"
+                }
             });
 
             // Seed teachers
@@ -114,6 +117,44 @@
                     BirthDate = new DateTime(1994, 01, 06)
                 },
                 IdenityUserId = "65657345hgjtfr",
+            });
+
+            // Seed students
+            this.dbContext.Students.Add(new Student()
+            {
+                Id = 1,
+                IdentityUser = new ApplicationUser()
+                {
+                    UserName = "jicata",
+                    FirstName = "Svetlin",
+                    LastName = "Galov",
+                    BirthDate = new DateTime(1992, 01, 06)
+                },
+                IdenityUserId = "asgwe343fdfh5"
+            });
+            this.dbContext.Students.Add(new Student()
+            {
+                Id = 2,
+                IdentityUser = new ApplicationUser()
+                {
+                    UserName = "slav97",
+                    FirstName = "Slav",
+                    LastName = "Radev",
+                    BirthDate = new DateTime(1997, 06, 01)
+                },
+                IdenityUserId = "12412dfgdf",
+            });
+            this.dbContext.Students.Add(new Student()
+            {
+                Id = 3,
+                IdentityUser = new ApplicationUser()
+                {
+                    UserName = "dutskinov",
+                    FirstName = "Niki",
+                    LastName = "Dutskinov",
+                    BirthDate = new DateTime(1995, 11, 06)
+                },
+                IdenityUserId = "asdfasda32423",
             });
 
         }

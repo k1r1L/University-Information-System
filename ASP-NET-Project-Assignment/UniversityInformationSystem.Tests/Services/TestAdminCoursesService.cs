@@ -16,8 +16,8 @@
         [TestInitialize]
         public void Init()
         {
-            this.coursesService = new AdminCoursesService(dbContext, 
-                new MockedCourseRepository(dbContext), new MockedTeachersRepository(dbContext));
+            this.coursesService = new AdminCoursesService(this.dbContext, 
+                new MockedCourseRepository(this.dbContext), new MockedTeachersRepository(this.dbContext));
         }
 
         [TestMethod]
@@ -107,7 +107,7 @@
         }
 
         [TestMethod]
-        public void Test_AddTeacher_TeacherId_Should_Be_Correct()
+        public void Test_AddTeacher_Should_Add_Teacher_To_Course()
         {
             // Arrange
             int teacherId = 3;

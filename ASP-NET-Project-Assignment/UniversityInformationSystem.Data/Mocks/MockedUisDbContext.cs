@@ -1,5 +1,6 @@
 ﻿namespace UniversityInformationSystem.Data.Mocks
 {
+    using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using Contracts;
@@ -28,10 +29,10 @@
             return new MockedDbSet<T>();
         }
 
-
+        // TODO: Implement this
         public DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class
         {
-            return null;
+            throw new NotImplementedException();
         }
 
         public int SaveChanges()

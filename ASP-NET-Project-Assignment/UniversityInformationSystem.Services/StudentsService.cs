@@ -5,6 +5,7 @@
     using AutoMapper;
     using Contracts;
     using Data.Contracts;
+    using Data.Mocks.Repositories;
     using Models.EntityModels.Users;
     using Models.ViewModels.Student;
 
@@ -14,6 +15,14 @@
         public StudentsService(IUisDataContext dbContext)
             : base(dbContext)
         {
+        }
+
+        // Constructor for unit testing
+        public StudentsService(IUisDataContext dbContext, MockedStudentsRepository mockedStudentsRepository)
+            : base(dbContext)
+        {
+            this.StudentRepository = mockedStudentsRepository;
+            this.SeedStudents();
         }
 
         public Student GetStudentByUsername(string username)

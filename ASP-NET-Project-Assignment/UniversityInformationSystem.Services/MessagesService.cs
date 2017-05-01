@@ -5,15 +5,25 @@
     using AutoMapper;
     using Contracts;
     using Data.Contracts;
+    using Data.Mocks.Repositories;
     using Models.EntityModels;
     using Models.EntityModels.Users;
     using Models.ViewModels.Messages;
 
     public class MessagesService : Service, IMessagesService
     {
-        public MessagesService(IUisDataContext dbContext) 
+        public MessagesService(IUisDataContext dbContext)
             : base(dbContext)
         {
+        }
+
+        // Constructor for unit testing
+        public MessagesService(IUisDataContext dbContext, MockedMessagesRepository mockedMessagesRepository)
+             : base(dbContext)
+        {
+            this.MessagesRepository = mockedMessagesRepository;
+            this.SeedStudents();
+            this.SeedTeachers();
         }
 
         public void Create(string senderUsername, string reveiverUsername, string messageText)
