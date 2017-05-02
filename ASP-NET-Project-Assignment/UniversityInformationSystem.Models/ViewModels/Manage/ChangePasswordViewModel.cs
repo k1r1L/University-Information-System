@@ -1,7 +1,7 @@
 ﻿namespace UniversityInformationSystem.Models.ViewModels.Manage
 {
     using System.ComponentModel.DataAnnotations;
-    using Utillities;
+    using Utillities.Constants;
 
     public class ChangePasswordViewModel
     {

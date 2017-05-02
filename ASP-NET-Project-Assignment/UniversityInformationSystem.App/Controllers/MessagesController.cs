@@ -4,11 +4,11 @@
     using System.Linq;
     using System.Runtime.InteropServices.ComTypes;
     using System.Web.Mvc;
-    using Exceptions;
     using Models.EntityModels.Users;
     using Models.ViewModels.Messages;
     using PagedList;
     using Services.Contracts;
+    using Utillities.Exceptions;
 
     [RoutePrefix("messages")]
     [Authorize]
@@ -68,7 +68,7 @@
             return this.View(inboxMessages.ToPagedList(pageNumber, pageSize));
         }
 
-        [Route("delete/{id}")]
+        [Route("delete/{id:regex(^[\\d]+$)}")]
         [HttpGet]
         public ActionResult Delete(int id)
         {
@@ -87,7 +87,7 @@
             return this.View(messageVm);
         }
 
-        [Route("delete/{id}")]
+        [Route("delete/{id:regex(^[\\d]+$)}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

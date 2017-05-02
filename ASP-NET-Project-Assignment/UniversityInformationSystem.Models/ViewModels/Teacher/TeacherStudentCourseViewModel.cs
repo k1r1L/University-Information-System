@@ -3,7 +3,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
     using Enums;
-    using Utillities;
+    using Utillities.Constants;
 
     public class TeacherStudentCourseViewModel
     {

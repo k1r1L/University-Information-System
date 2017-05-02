@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityInformationSystem.App", "UniversityInformationSystem.App\UniversityInformationSystem.App.csproj", "{6B7BD8AC-354E-45BF-B641-CA26DECCE4DD}"
 EndProject
@@ -12,6 +12,23 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityInformationSystem.Models", "UniversityInformationSystem.Models\UniversityInformationSystem.Models.csproj", "{9DC41A1B-7336-461F-BEED-BC29EEBD2C34}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityInformationSystem.Tests", "UniversityInformationSystem.Tests\UniversityInformationSystem.Tests.csproj", "{336D0C4C-27AE-48F0-99C4-332FFE686431}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Screenshots", "Screenshots", "{1A6E099B-58CB-488C-98AE-B70E3F50BB89}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Downloads\screenshots\adminarea.png = ..\..\..\..\Downloads\screenshots\adminarea.png
+		..\..\..\..\Downloads\screenshots\admincourses.png = ..\..\..\..\Downloads\screenshots\admincourses.png
+		..\..\..\..\Downloads\screenshots\adminstudentscourses.png = ..\..\..\..\Downloads\screenshots\adminstudentscourses.png
+		..\..\..\..\Downloads\screenshots\allusers.png = ..\..\..\..\Downloads\screenshots\allusers.png
+		..\..\..\..\Downloads\screenshots\inbox.png = ..\..\..\..\Downloads\screenshots\inbox.png
+		..\..\..\..\Downloads\screenshots\loginform.png = ..\..\..\..\Downloads\screenshots\loginform.png
+		..\..\..\..\Downloads\screenshots\profile.png = ..\..\..\..\Downloads\screenshots\profile.png
+		..\..\..\..\Downloads\screenshots\registeruserform.png = ..\..\..\..\Downloads\screenshots\registeruserform.png
+		..\..\..\..\Downloads\screenshots\sendmessageform.png = ..\..\..\..\Downloads\screenshots\sendmessageform.png
+		..\..\..\..\Downloads\screenshots\studentarea.png = ..\..\..\..\Downloads\screenshots\studentarea.png
+		..\..\..\..\Downloads\screenshots\teacherarea.png = ..\..\..\..\Downloads\screenshots\teacherarea.png
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityInformationSystem.Utillities", "UniversityInformationSystem.Utillities\UniversityInformationSystem.Utillities.csproj", "{49D572B9-0932-43EE-87F7-46C7B916C2B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +56,10 @@ Global
 		{336D0C4C-27AE-48F0-99C4-332FFE686431}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{336D0C4C-27AE-48F0-99C4-332FFE686431}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{336D0C4C-27AE-48F0-99C4-332FFE686431}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49D572B9-0932-43EE-87F7-46C7B916C2B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49D572B9-0932-43EE-87F7-46C7B916C2B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49D572B9-0932-43EE-87F7-46C7B916C2B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49D572B9-0932-43EE-87F7-46C7B916C2B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

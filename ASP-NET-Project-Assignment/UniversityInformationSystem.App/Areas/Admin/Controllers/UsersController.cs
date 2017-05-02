@@ -14,10 +14,10 @@
     using Microsoft.AspNet.Identity.Owin;
     using Models.EntityModels.Users;
     using Models.Enums;
-    using Models.Utillities;
     using Models.ViewModels.Account;
     using Models.ViewModels.Admin;
     using Services.Contracts;
+    using Utillities.Constants;
 
     [RoutePrefix("users")]
     public class UsersController : AdminController

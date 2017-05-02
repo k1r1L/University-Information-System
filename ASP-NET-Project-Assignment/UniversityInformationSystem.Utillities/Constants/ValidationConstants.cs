@@ -1,4 +1,4 @@
-﻿namespace UniversityInformationSystem.Models.Utillities
+﻿namespace UniversityInformationSystem.Utillities.Constants
 {
     public class ValidationConstants
     {

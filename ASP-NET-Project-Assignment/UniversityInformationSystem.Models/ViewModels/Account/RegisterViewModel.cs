@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using Enums;
-    using Utillities;
+    using Utillities.Constants;
 
     public class RegisterViewModel
     {

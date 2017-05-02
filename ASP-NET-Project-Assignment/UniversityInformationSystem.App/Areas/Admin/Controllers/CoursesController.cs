@@ -27,7 +27,7 @@
             return View();
         }
 
-        [Route("CourseViewModels_Read")]
+        [Route("read")]
         public ActionResult CourseViewModels_Read([DataSourceRequest]DataSourceRequest request)
         {
             IQueryable<AdminCourseViewModel> courseviewmodels = this.coursesService.GetAll();
@@ -35,7 +35,7 @@
             return Json(courseviewmodels.ToDataSourceResult(request));
         }
 
-        [Route("CourseViewModels_Create")]
+        [Route("create")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CourseViewModels_Create([DataSourceRequest]DataSourceRequest request, 
             [Bind(Prefix = "models")]IEnumerable<AdminCourseViewModel> courses)
@@ -65,7 +65,7 @@
             return Json(results.ToDataSourceResult(request, this.ModelState));
         }
 
-        [Route("CourseViewModels_Update")]
+        [Route("update")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CourseViewModels_Update([DataSourceRequest]DataSourceRequest request, 
             [Bind(Prefix = "models")]IEnumerable<AdminCourseViewModel> courses)
@@ -89,7 +89,7 @@
             return Json(results.ToDataSourceResult(request, this.ModelState));
         }
 
-        [Route("CourseViewModels_Destroy")]
+        [Route("destroy")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CourseViewModels_Destroy([DataSourceRequest]DataSourceRequest request,
             [Bind(Prefix = "models")]IEnumerable<AdminCourseViewModel> courses)

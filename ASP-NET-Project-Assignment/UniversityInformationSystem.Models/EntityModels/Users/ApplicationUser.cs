@@ -8,7 +8,7 @@
     using System.Threading.Tasks;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
-    using Utillities;
+    using Utillities.Constants;
 
     public class ApplicationUser : IdentityUser
     {

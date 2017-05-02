@@ -28,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.BirthDate, new {@class = "col-md-2 control-label"})
             <div class="col-md-10">
-                @Html.EditorFor(m => m.BirthDate, new {@class = "form-control"})
+                @Html.EditorFor(m => m.BirthDate)
                 @Html.ValidationMessageFor(m => m.BirthDate, null, new {@class = "text-danger"})
             </div>
         </div>

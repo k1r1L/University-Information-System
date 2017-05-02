@@ -2,7 +2,7 @@
 {
     using System.Web;
     using System.Web.Mvc;
-    using Exceptions;
+    using Utillities.Exceptions;
 
     public class FilterConfig
     {
@@ -11,15 +11,17 @@
             filters.Add(new HandleErrorAttribute()
             {
                 ExceptionType = typeof(UnauthorizedDeleteException),
-                View = "_UnauthorizedDeleteMessageError"
+                View = "CustomErrors/_UnauthorizedDeleteMessageError"
             });
 
             filters.Add(new HandleErrorAttribute()
             {
                 ExceptionType = typeof(NonExistingMessageException),
-                View = "_NonExistingMessageError"
+                View = "CustomErrors/_NonExistingMessageError"
             });
 
+
+            filters.Add(new HandleErrorAttribute());
         }
     }
 }

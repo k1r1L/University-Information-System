@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using Users;
-    using Utillities;
+    using Utillities.Constants;
 
     public class Course
     {

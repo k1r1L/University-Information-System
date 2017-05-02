@@ -251,10 +251,9 @@
     <Compile Include="Areas\Teacher\Controllers\TeacherController.cs" />
     <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
-    <Compile Include="Exceptions\NonExistingMessageException.cs" />
-    <Compile Include="Exceptions\UnauthorizedDeleteException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -262,6 +261,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\404.jpg" />
+    <Content Include="Content\500.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -415,6 +416,8 @@
     <Content Include="Views\Messages\Delete.cshtml" />
     <Content Include="Views\Shared\CustomErrors\_NonExistingMessageError.cshtml" />
     <Content Include="Views\Shared\CustomErrors\_UnauthorizedDeleteMessageError.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\ServerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UniversityInformationSystem.Data\UniversityInformationSystem.Data.csproj">
@@ -428,6 +431,10 @@
     <ProjectReference Include="..\UniversityInformationSystem.Services\UniversityInformationSystem.Services.csproj">
       <Project>{8ac984b5-f7ef-4fbb-8687-911270ef79fd}</Project>
       <Name>UniversityInformationSystem.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UniversityInformationSystem.Utillities\UniversityInformationSystem.Utillities.csproj">
+      <Project>{49d572b9-0932-43ee-87f7-46c7b916c2b5}</Project>
+      <Name>UniversityInformationSystem.Utillities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

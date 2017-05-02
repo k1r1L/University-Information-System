@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
-    using Utillities;
+    using Utillities.Constants;
 
     public class AdminStudentCourseViewModel
     {

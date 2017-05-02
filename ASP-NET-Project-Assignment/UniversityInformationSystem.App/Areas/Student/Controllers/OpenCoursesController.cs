@@ -7,9 +7,9 @@
     using System.Web.Mvc;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
-    using Models.Utillities;
     using Models.ViewModels.Student;
     using Services.Contracts;
+    using Utillities.Constants;
 
     [RoutePrefix("opencourses")]
     public class OpenCoursesController : StudentController
