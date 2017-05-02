@@ -6,6 +6,7 @@
     using AutoMapper;
     using Contracts;
     using Data.Contracts;
+    using Data.Mocks.Repositories;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models.EntityModels;
@@ -18,6 +19,14 @@
         public UsersService(IUisDataContext dbContext) 
             : base(dbContext)
         {
+        }
+
+        public UsersService(IUisDataContext dbContext, MockedUsersRepository mockedUsersRepository)
+            : base(dbContext)
+        {
+            this.ApplicationUserRepository = mockedUsersRepository;
+            this.SeedStudents();
+            this.SeedTeachers();
         }
 
         public void Register(UserType userType, string appUserId)
@@ -146,6 +155,25 @@
 
             this.StudentRepository.Delete(studentEntity);
             this.SaveChanges();
+        }
+
+        // Methods used for testing
+        public IEnumerable<Student> GetAllStudents()
+        {
+            return this.StudentRepository.All();
+        }
+
+        public IEnumerable<Teacher> GetAllTeachers()
+        {
+            return this.TeacherRepository.All();
+        }
+
+        public string ReturnPasswordHash(string username)
+        {
+            return this.ApplicationUserRepository
+                .All()
+                .First(u => u.UserName == username)
+                .PasswordHash;
         }
     }
 }

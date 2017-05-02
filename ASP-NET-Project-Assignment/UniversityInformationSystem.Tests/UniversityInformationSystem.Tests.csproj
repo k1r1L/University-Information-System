@@ -112,6 +112,7 @@
     <Compile Include="Services\TestTeacherCoursesService.cs" />
     <Compile Include="Services\TestTeachersService.cs" />
     <Compile Include="Services\TestTeacherStudentsService.cs" />
+    <Compile Include="Services\TestUsersService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UniversityInformationSystem.App\UniversityInformationSystem.App.csproj">

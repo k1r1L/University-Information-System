@@ -8,7 +8,7 @@
     using Models.EntityModels;
     using Models.EntityModels.Users;
 
-    public class MockedUisDbContext : IUisDataContext
+    public class MockedUisDbContext : DbContext,  IUisDataContext
     {
         public MockedUisDbContext()
         {
@@ -40,7 +40,7 @@
             return 0;
         }
 
-        public DbContext DbContext { get; }
+        public DbContext DbContext => new MockedUisDbContext();
 
         public void Dispose()
         {

@@ -20,6 +20,7 @@
 
         protected void SeedData()
         {
+            // Seed users
             // Seed teachers
             this.dbContext.Teachers.Add(new Teacher()
             {
@@ -29,7 +30,9 @@
                    UserName = "kircata",
                    FirstName = "Kiril",
                    LastName = "Kirilov",
-                   BirthDate = new DateTime(1998, 01, 06)
+                   BirthDate = new DateTime(1998, 01, 06),
+                   Id = "asdasds234234ad",
+                   PasswordHash = "asdhasdgahsdghas"
                 },
                 IdenityUserId = "asdasds234234ad"
             });
@@ -67,7 +70,8 @@
                     UserName = "jicata",
                     FirstName = "Svetlin",
                     LastName = "Galov",
-                    BirthDate = new DateTime(1992, 01, 06)
+                    BirthDate = new DateTime(1992, 01, 06),
+                    Id = "asgwe343fdfh5"
                 },
                 IdenityUserId = "asgwe343fdfh5"
             });
