@@ -12,7 +12,7 @@
 
     [RoutePrefix("messages")]
     [Authorize]
-    public class MessagesController : Controller
+    public class MessagesController : BaseController
     {
         private const int pageSize = 5;
         private IMessagesService messagesService;
@@ -34,14 +34,23 @@
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateMessageViewModel messageVm)
         {
-            if (this.ModelState.IsValid)
+            if (!this.messagesService.ReceiverExists(messageVm.ReceiverUsername))
             {
-                string senderUsername = HttpContext.User.Identity.Name;
-                this.messagesService.Create(senderUsername, messageVm.ReceiverUsername, messageVm.Text);
-                return this.RedirectToAction("SuccessfulCreate", new { receiverUsername = messageVm.ReceiverUsername});
+                this.Danger($"Username with {messageVm.ReceiverUsername} does not exists!");
+            }
+            else
+            {
+                if (this.ModelState.IsValid)
+                {
+                    string senderUsername = HttpContext.User.Identity.Name;
+                    this.messagesService.Create(senderUsername, messageVm.ReceiverUsername, messageVm.Text);
+                    this.Success("Send successfully!", true);
+                    return this.RedirectToAction("Inbox");
+                }
             }
 
-            return this.View();
+            this.Danger("Something else went wrong!");
+            return this.RedirectToAction("Create");
         }
 
         [Route("success")]

@@ -70,12 +70,13 @@
             @Html.Partial("~/Areas/Student/Views/Shared/_StudentSidebar.cshtml")
         }
     </div>
-    <div class="main">
-        @RenderBody()
-        <footer>
-            <p>&copy; @DateTime.Now.Year - University Information System (Made By Kiril Kirilov)</p>
-        </footer>
-    </div>
+<div class="main">
+    @Html.Partial("_Alerts")
+    @RenderBody()
+    <footer>
+        <p>&copy; @DateTime.Now.Year - University Information System (Made By Kiril Kirilov)</p>
+    </footer>
+</div>
 
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alerts\Alert.cs" />
+    <Compile Include="Constants\AlertStyles.cs" />
     <Compile Include="Constants\ExceptionMessages.cs" />
     <Compile Include="Constants\ValidationConstants.cs" />
     <Compile Include="Exceptions\NonExistingMessageException.cs" />

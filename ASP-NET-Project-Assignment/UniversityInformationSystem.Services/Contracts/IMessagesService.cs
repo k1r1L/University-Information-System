@@ -22,5 +22,7 @@
         bool MessageExists(int id);
 
         bool UnauthorizedDelete(int id, string receiver);
+
+        bool ReceiverExists(string username);
     }
 }

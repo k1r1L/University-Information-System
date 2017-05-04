@@ -93,5 +93,12 @@
 
             return messageEntity.Receiver.UserName != receiver;
         }
+
+        public bool ReceiverExists(string username)
+        {
+            return this.ApplicationUserRepository
+                .All()
+                .Any(u => u.UserName == username);
+        }
     }
 }
